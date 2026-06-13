@@ -1,0 +1,40 @@
+{
+  "data": {
+    "area_name": "Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area",
+    "area_code": "METRO47900M47900",
+    "county_name": "District of Columbia",
+    "state_name": "District of Columbia",
+    "year": "2024",
+    "median_income": 143300,
+    "VeryLow": {
+      "l1": 50150,
+      "l2": 57300,
+      "l3": 64450,
+      "l4": 71600,
+      "l5": 77350,
+      "l6": 83100,
+      "l7": 88800,
+      "l8": 94550
+    },
+    "ExtVeryLow": {
+      "l1": 30100,
+      "l2": 34400,
+      "l3": 38700,
+      "l4": 42950,
+      "l5": 46400,
+      "l6": 49850,
+      "l7": 53300,
+      "l8": 56700
+    },
+    "Low": {
+      "l1": 80200,
+      "l2": 91650,
+      "l3": 103100,
+      "l4": 114500,
+      "l5": 123700,
+      "l6": 132850,
+      "l7": 142050,
+      "l8": 151200
+    }
+  }
+}

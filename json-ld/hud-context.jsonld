@@ -1,0 +1,260 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "hud": "https://www.huduser.gov/vocab/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+
+    "HousingCounselingAgency": {
+      "@id": "hud:HousingCounselingAgency",
+      "@type": "@id"
+    },
+    "FairMarketRent": {
+      "@id": "hud:FairMarketRent",
+      "@type": "@id"
+    },
+    "IncomeLimits": {
+      "@id": "hud:IncomeLimits",
+      "@type": "@id"
+    },
+    "ZIPCrosswalk": {
+      "@id": "hud:ZIPCrosswalk",
+      "@type": "@id"
+    },
+    "CHASData": {
+      "@id": "hud:CHASData",
+      "@type": "@id"
+    },
+
+    "nme": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "agcid": {
+      "@id": "hud:agencyId",
+      "@type": "xsd:string"
+    },
+    "parentid": {
+      "@id": "hud:parentAgencyId",
+      "@type": "xsd:string"
+    },
+    "adr1": {
+      "@id": "schema:streetAddress",
+      "@type": "xsd:string"
+    },
+    "adr2": {
+      "@id": "hud:addressLine2",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "schema:addressLocality",
+      "@type": "xsd:string"
+    },
+    "statecd": {
+      "@id": "schema:addressRegion",
+      "@type": "xsd:string"
+    },
+    "zipcd": {
+      "@id": "schema:postalCode",
+      "@type": "xsd:string"
+    },
+    "county_NME": {
+      "@id": "hud:countyName",
+      "@type": "xsd:string"
+    },
+    "state_NME": {
+      "@id": "hud:stateName",
+      "@type": "xsd:string"
+    },
+    "state_FIPS_CODE": {
+      "@id": "hud:stateFIPS",
+      "@type": "xsd:string"
+    },
+    "phone1": {
+      "@id": "schema:telephone",
+      "@type": "xsd:string"
+    },
+    "phone2": {
+      "@id": "hud:secondaryPhone",
+      "@type": "xsd:string"
+    },
+    "fax": {
+      "@id": "schema:faxNumber",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "weburl": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "agc_ADDR_LATITUDE": {
+      "@id": "geo:lat",
+      "@type": "xsd:string"
+    },
+    "agc_ADDR_LONGITUDE": {
+      "@id": "geo:long",
+      "@type": "xsd:string"
+    },
+    "agc_STATUS": {
+      "@id": "hud:agencyStatus",
+      "@type": "xsd:string"
+    },
+    "agc_SRC_CD": {
+      "@id": "hud:agencySourceCode",
+      "@type": "xsd:string"
+    },
+    "languages": {
+      "@id": "hud:languagesServed",
+      "@type": "xsd:string"
+    },
+    "faithbased": {
+      "@id": "hud:faithBased",
+      "@type": "xsd:string"
+    },
+    "colonias_IND": {
+      "@id": "hud:servesColonias",
+      "@type": "xsd:string"
+    },
+    "migrantwkrs_IND": {
+      "@id": "hud:servesMigrantWorkers",
+      "@type": "xsd:string"
+    },
+    "counslg_METHOD": {
+      "@id": "hud:counselingMethods",
+      "@type": "xsd:string"
+    },
+    "services": {
+      "@id": "hud:servicesCodes",
+      "@type": "xsd:string"
+    },
+
+    "area_name": {
+      "@id": "hud:areaName",
+      "@type": "xsd:string"
+    },
+    "area_code": {
+      "@id": "hud:areaCode",
+      "@type": "xsd:string"
+    },
+    "county_name": {
+      "@id": "hud:countyName",
+      "@type": "xsd:string"
+    },
+    "year": {
+      "@id": "hud:fiscalYear",
+      "@type": "xsd:string"
+    },
+    "fmr_type": {
+      "@id": "hud:fmrPercentileType",
+      "@type": "xsd:integer"
+    },
+    "smallarea_status": {
+      "@id": "hud:smallAreaStatus",
+      "@type": "xsd:string"
+    },
+    "basicdata": {
+      "@id": "hud:rentByBedrooms",
+      "@type": "@id"
+    },
+    "Efficiency": {
+      "@id": "hud:efficiencyFMR",
+      "@type": "xsd:decimal"
+    },
+    "One-Bedroom": {
+      "@id": "hud:oneBedroomFMR",
+      "@type": "xsd:decimal"
+    },
+    "Two-Bedroom": {
+      "@id": "hud:twoBedroomFMR",
+      "@type": "xsd:decimal"
+    },
+    "Three-Bedroom": {
+      "@id": "hud:threeBedroomFMR",
+      "@type": "xsd:decimal"
+    },
+    "Four-Bedroom": {
+      "@id": "hud:fourBedroomFMR",
+      "@type": "xsd:decimal"
+    },
+
+    "median_income": {
+      "@id": "hud:areaMedianIncome",
+      "@type": "xsd:integer"
+    },
+    "VeryLow": {
+      "@id": "hud:veryLowIncomeLimit",
+      "@type": "@id"
+    },
+    "ExtVeryLow": {
+      "@id": "hud:extremelyLowIncomeLimit",
+      "@type": "@id"
+    },
+    "Low": {
+      "@id": "hud:lowIncomeLimit",
+      "@type": "@id"
+    },
+    "l1": { "@id": "hud:onePerson", "@type": "xsd:integer" },
+    "l2": { "@id": "hud:twoPerson", "@type": "xsd:integer" },
+    "l3": { "@id": "hud:threePerson", "@type": "xsd:integer" },
+    "l4": { "@id": "hud:fourPerson", "@type": "xsd:integer" },
+    "l5": { "@id": "hud:fivePerson", "@type": "xsd:integer" },
+    "l6": { "@id": "hud:sixPerson", "@type": "xsd:integer" },
+    "l7": { "@id": "hud:sevenPerson", "@type": "xsd:integer" },
+    "l8": { "@id": "hud:eightPerson", "@type": "xsd:integer" },
+
+    "zip": {
+      "@id": "hud:zipCode",
+      "@type": "xsd:string"
+    },
+    "geoid": {
+      "@id": "hud:geoId",
+      "@type": "xsd:string"
+    },
+    "county": {
+      "@id": "hud:countyFIPS",
+      "@type": "xsd:string"
+    },
+    "tract": {
+      "@id": "hud:censusTract",
+      "@type": "xsd:string"
+    },
+    "cbsa": {
+      "@id": "hud:cbsaCode",
+      "@type": "xsd:string"
+    },
+    "cd": {
+      "@id": "hud:congressionalDistrict",
+      "@type": "xsd:string"
+    },
+    "res_ratio": {
+      "@id": "hud:residentialRatio",
+      "@type": "xsd:decimal"
+    },
+    "bus_ratio": {
+      "@id": "hud:businessRatio",
+      "@type": "xsd:decimal"
+    },
+    "oth_ratio": {
+      "@id": "hud:otherRatio",
+      "@type": "xsd:decimal"
+    },
+    "tot_ratio": {
+      "@id": "hud:totalRatio",
+      "@type": "xsd:decimal"
+    },
+
+    "geoname": {
+      "@id": "hud:geoName",
+      "@type": "xsd:string"
+    },
+    "sumlevel": {
+      "@id": "hud:summaryLevel",
+      "@type": "xsd:string"
+    }
+  }
+}

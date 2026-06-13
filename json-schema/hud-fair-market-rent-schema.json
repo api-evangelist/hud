@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hud/main/json-schema/hud-fair-market-rent-schema.json",
+  "title": "HUD Fair Market Rent",
+  "description": "Schema for Fair Market Rent data returned by the HUD User FMR API",
+  "type": "object",
+  "properties": {
+    "area_name": {
+      "type": "string",
+      "description": "Name of the geographic area (county or metro area)"
+    },
+    "area_code": {
+      "type": "string",
+      "description": "HUD area code"
+    },
+    "county_name": {
+      "type": "string",
+      "description": "County name if applicable"
+    },
+    "counties_msa": {
+      "type": "string",
+      "description": "Counties within the MSA"
+    },
+    "year": {
+      "type": "string",
+      "description": "Fiscal year for the FMR data"
+    },
+    "fmr_type": {
+      "type": "integer",
+      "description": "FMR percentile type (40 or 50)",
+      "enum": [40, 50]
+    },
+    "smallarea_status": {
+      "type": "string",
+      "description": "Whether small area FMRs apply (0=No, 1=Yes)",
+      "enum": ["0", "1"]
+    },
+    "basicdata": {
+      "type": "object",
+      "description": "FMR values by bedroom size",
+      "properties": {
+        "Efficiency": {
+          "type": "number",
+          "description": "FMR for efficiency/studio unit in USD"
+        },
+        "One-Bedroom": {
+          "type": "number",
+          "description": "FMR for one-bedroom unit in USD"
+        },
+        "Two-Bedroom": {
+          "type": "number",
+          "description": "FMR for two-bedroom unit in USD"
+        },
+        "Three-Bedroom": {
+          "type": "number",
+          "description": "FMR for three-bedroom unit in USD"
+        },
+        "Four-Bedroom": {
+          "type": "number",
+          "description": "FMR for four-bedroom unit in USD"
+        }
+      },
+      "required": ["Efficiency", "One-Bedroom", "Two-Bedroom", "Three-Bedroom", "Four-Bedroom"]
+    }
+  },
+  "required": ["area_name", "year", "basicdata"]
+}

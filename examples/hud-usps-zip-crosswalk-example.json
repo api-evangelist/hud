@@ -1,0 +1,18 @@
+{
+  "data": {
+    "results": [
+      {
+        "zip": "20001",
+        "geoid": "11001",
+        "county": "11001",
+        "tract": null,
+        "cbsa": "47900",
+        "cd": "1100098",
+        "res_ratio": 1.0,
+        "bus_ratio": 1.0,
+        "oth_ratio": 1.0,
+        "tot_ratio": 1.0
+      }
+    ]
+  }
+}

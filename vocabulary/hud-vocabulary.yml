@@ -1,0 +1,270 @@
+vocabulary:
+  name: HUD API Vocabulary
+  description: >-
+    Common terms and abbreviations used across HUD User API responses
+    and HUD Housing Counseling API data.
+  version: 1.0.0
+  source: https://www.huduser.gov/portal/dataset/api.html
+  terms:
+
+    # Geographic Terms
+    - term: AMI
+      label: Area Median Income
+      description: >-
+        The median family income for a metropolitan area or non-metropolitan
+        county as estimated by HUD and adjusted for family size.
+      category: Geographic
+
+    - term: CBSA
+      label: Core Based Statistical Area
+      description: >-
+        A collective term for both metropolitan and micropolitan statistical
+        areas. Defined by the U.S. Office of Management and Budget.
+      category: Geographic
+
+    - term: MSA
+      label: Metropolitan Statistical Area
+      description: >-
+        A geographic entity with at least one urbanized area of 50,000
+        or more population plus adjacent territory.
+      category: Geographic
+
+    - term: FIPS
+      label: Federal Information Processing Standards
+      description: >-
+        Standardized geographic codes used to uniquely identify U.S.
+        states, counties, and census tracts. State codes are 2 digits,
+        county codes are 5 digits (state + county).
+      category: Geographic
+
+    - term: FMR
+      label: Fair Market Rent
+      description: >-
+        The HUD-estimated rent (including utilities) that would be paid
+        for a modestly-priced rental unit in a specific housing market.
+        Used as the basis for Housing Choice Voucher (Section 8) payment
+        standards.
+      category: Housing
+
+    - term: MCD
+      label: Minor Civil Division
+      description: >-
+        A political or administrative subdivision of a county such as
+        townships, towns, and districts.
+      category: Geographic
+
+    # Income Categories
+    - term: ELI
+      label: Extremely Low Income
+      description: >-
+        Household income at or below 30% of Area Median Income (AMI).
+        Used to determine eligibility for certain HUD assistance programs.
+      category: Income
+
+    - term: VLI
+      label: Very Low Income
+      description: >-
+        Household income at or below 50% of Area Median Income (AMI).
+        Threshold for Section 8 Housing Choice Voucher eligibility.
+      category: Income
+
+    - term: LI
+      label: Low Income
+      description: >-
+        Household income at or below 80% of Area Median Income (AMI).
+        Eligibility threshold for many HUD community development programs.
+      category: Income
+
+    # Program Terms
+    - term: CHAS
+      label: Comprehensive Housing Affordability Strategy
+      description: >-
+        Special tabulations of census data prepared by HUD to show the
+        extent of housing problems and housing needs for low-income
+        households. Used for Consolidated Plan submissions.
+      category: Program
+
+    - term: Section 8
+      label: Housing Choice Voucher Program
+      description: >-
+        The federal government's major program for assisting very
+        low-income families, the elderly, and the disabled to afford
+        decent, safe, and sanitary housing in the private market.
+      category: Program
+
+    - term: HOME
+      label: HOME Investment Partnerships Program
+      description: >-
+        HUD's largest federal block grant to state and local governments
+        designed exclusively to create affordable housing for low-income
+        households.
+      category: Program
+
+    - term: CDBG
+      label: Community Development Block Grant
+      description: >-
+        A flexible program that provides communities with resources to
+        address a wide range of unique community development needs.
+      category: Program
+
+    # Housing Counseling Service Codes
+    - term: DFC
+      label: Default/Foreclosure Counseling
+      description: Counseling for homeowners facing mortgage default or foreclosure.
+      category: HousingCounselingService
+
+    - term: DFW
+      label: Default/Foreclosure Workshop
+      description: Group education workshop on avoiding foreclosure.
+      category: HousingCounselingService
+
+    - term: FBC
+      label: Fair Housing/Pre-Purchase Counseling
+      description: Individual counseling on fair housing rights and pre-purchase topics.
+      category: HousingCounselingService
+
+    - term: FBW
+      label: Fair Housing Pre-Purchase Education Workshop
+      description: Group workshop on fair housing and home buying education.
+      category: HousingCounselingService
+
+    - term: FHW
+      label: Fair Housing Workshop
+      description: Group education workshop focused on fair housing rights.
+      category: HousingCounselingService
+
+    - term: HIC
+      label: Home Improvement Counseling
+      description: Counseling on home repair, renovation, and improvement financing.
+      category: HousingCounselingService
+
+    - term: HMC
+      label: Home Maintenance Counseling
+      description: Counseling on proper home maintenance and upkeep.
+      category: HousingCounselingService
+
+    - term: NDW
+      label: Non-Delinquency Post-Purchase Counseling Workshop
+      description: >-
+        Group workshop for current homeowners who are not in default,
+        covering topics like budgeting, home maintenance, and equity building.
+      category: HousingCounselingService
+
+    - term: PLW
+      label: Predatory Lending Workshop
+      description: >-
+        Group education workshop on identifying and avoiding predatory
+        lending practices.
+      category: HousingCounselingService
+
+    - term: PPC
+      label: Pre-Purchase Counseling
+      description: >-
+        Individual counseling to prepare prospective homebuyers for the
+        process of purchasing a home.
+      category: HousingCounselingService
+
+    - term: PPW
+      label: Pre-Purchase Homebuyer Education Workshop
+      description: >-
+        Group education workshop covering the home buying process,
+        financing, and homeownership responsibilities.
+      category: HousingCounselingService
+
+    - term: RHC
+      label: Rental Housing Counseling
+      description: >-
+        Individual counseling for renters on topics such as tenant rights,
+        rental assistance, and transitioning to homeownership.
+      category: HousingCounselingService
+
+    - term: RHW
+      label: Rental Housing Workshop
+      description: Group workshop on rental housing topics.
+      category: HousingCounselingService
+
+    - term: RMC
+      label: Reverse Mortgage Counseling
+      description: >-
+        Required counseling for homeowners considering a Home Equity
+        Conversion Mortgage (HECM/reverse mortgage).
+      category: HousingCounselingService
+
+    # Agency Status Codes
+    - term: agc_STATUS_A
+      label: Active Agency Status
+      description: >-
+        Agency is in good standing and actively providing HUD-approved
+        housing counseling services.
+      category: AgencyStatus
+
+    - term: agc_STATUS_P
+      label: Probationary Agency Status
+      description: >-
+        Agency is operating under probationary conditions and may have
+        limited approval.
+      category: AgencyStatus
+
+    - term: agc_STATUS_S
+      label: Suspended Agency Status
+      description: >-
+        Agency's HUD approval has been suspended and may not be
+        providing approved counseling services.
+      category: AgencyStatus
+
+    # Language Codes
+    - term: ENG
+      label: English
+      description: English language counseling services available.
+      category: Language
+
+    - term: SPA
+      label: Spanish
+      description: Spanish language counseling services available.
+      category: Language
+
+    - term: CHI
+      label: Chinese
+      description: Chinese language counseling services available.
+      category: Language
+
+    - term: FRE
+      label: French
+      description: French language counseling services available.
+      category: Language
+
+    - term: FAR
+      label: Farsi/Persian
+      description: Farsi/Persian language counseling services available.
+      category: Language
+
+    - term: POR
+      label: Portuguese
+      description: Portuguese language counseling services available.
+      category: Language
+
+    - term: OTH
+      label: Other Languages
+      description: Additional languages beyond the common codes are available.
+      category: Language
+
+    # ZIP Code Crosswalk Types
+    - term: crosswalk_type_1
+      label: ZIP to County
+      description: Maps a USPS ZIP code to county FIPS codes.
+      category: CrosswalkType
+
+    - term: crosswalk_type_2
+      label: ZIP to Census Tract
+      description: Maps a USPS ZIP code to census tract FIPS codes.
+      category: CrosswalkType
+
+    - term: crosswalk_type_3
+      label: ZIP to CBSA
+      description: Maps a USPS ZIP code to Core Based Statistical Area codes.
+      category: CrosswalkType
+
+    - term: crosswalk_type_4
+      label: ZIP to Congressional District
+      description: Maps a USPS ZIP code to congressional district codes.
+      category: CrosswalkType

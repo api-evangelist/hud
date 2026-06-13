@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hud/main/json-schema/hud-income-limits-schema.json",
+  "title": "HUD Income Limits",
+  "description": "Schema for income limit data returned by the HUD User Income Limits API",
+  "type": "object",
+  "definitions": {
+    "IncomeLimitBySize": {
+      "type": "object",
+      "description": "Income limit values for household sizes 1-8 persons",
+      "properties": {
+        "l1": { "type": "integer", "description": "1-person household income limit in USD" },
+        "l2": { "type": "integer", "description": "2-person household income limit in USD" },
+        "l3": { "type": "integer", "description": "3-person household income limit in USD" },
+        "l4": { "type": "integer", "description": "4-person household income limit in USD" },
+        "l5": { "type": "integer", "description": "5-person household income limit in USD" },
+        "l6": { "type": "integer", "description": "6-person household income limit in USD" },
+        "l7": { "type": "integer", "description": "7-person household income limit in USD" },
+        "l8": { "type": "integer", "description": "8-person household income limit in USD" }
+      },
+      "required": ["l1", "l2", "l3", "l4", "l5", "l6", "l7", "l8"]
+    }
+  },
+  "properties": {
+    "area_name": {
+      "type": "string",
+      "description": "Name of the geographic area"
+    },
+    "area_code": {
+      "type": "string",
+      "description": "HUD area code"
+    },
+    "county_name": {
+      "type": "string",
+      "description": "County name if applicable"
+    },
+    "state_name": {
+      "type": "string",
+      "description": "State name"
+    },
+    "year": {
+      "type": "string",
+      "description": "Fiscal year for the income limit data"
+    },
+    "median_income": {
+      "type": "integer",
+      "description": "Area Median Income (AMI) in USD"
+    },
+    "VeryLow": {
+      "description": "Income limits at 50% of AMI (Very Low Income)",
+      "$ref": "#/definitions/IncomeLimitBySize"
+    },
+    "ExtVeryLow": {
+      "description": "Income limits at 30% of AMI (Extremely Low Income)",
+      "$ref": "#/definitions/IncomeLimitBySize"
+    },
+    "Low": {
+      "description": "Income limits at 80% of AMI (Low Income)",
+      "$ref": "#/definitions/IncomeLimitBySize"
+    }
+  },
+  "required": ["area_name", "year", "median_income", "VeryLow", "ExtVeryLow", "Low"]
+}

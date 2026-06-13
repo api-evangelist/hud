@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: HUD User CHAS API
+  description: >-
+    Comprehensive Housing Affordability Strategy (CHAS) data provides custom
+    tabulations of American Community Survey (ACS) data on housing needs at
+    national, state, county, place, and census tract levels. CHAS data is
+    used for Consolidated Planning submissions required to receive HUD formula
+    grant funds. Requires a free bearer token obtained from the HUD User portal.
+  version: 1.0.0
+  contact:
+    name: HUD User Support
+    url: https://www.huduser.gov/portal/contact.html
+  license:
+    name: Public Domain
+    url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+servers:
+  - url: https://www.huduser.gov/hudapi/public
+    description: HUD User Public API
+externalDocs:
+  description: HUD User CHAS API Documentation
+  url: https://www.huduser.gov/portal/dataset/chas-api.html
+security:
+  - bearerAuth: []
+tags:
+  - name: CHAS
+    description: Comprehensive Housing Affordability Strategy data
+paths:
+  /chas:
+    get:
+      summary: Get CHAS Data by Geography
+      description: >-
+        Returns CHAS housing needs data for a specified geography at
+        a given geographic level. Supports national, state, county,
+        place, MCD (Minor Civil Division), and census tract geographies.
+        Data includes household housing problems by income level and
+        tenure (owner vs. renter).
+      operationId: getCHASData
+      tags:
+        - CHAS
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: >-
+            Geographic level type:
+            1 = National,
+            2 = State,
+            3 = County,
+            4 = Place (incorporated city/town),
+            5 = Minor Civil Division (MCD),
+            6 = Census Tract
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 6
+            example: 3
+        - name: stateId
+          in: query
+          required: false
+          description: >-
+            2-digit state FIPS code. Required for type 3 (county),
+            type 4 (place), type 5 (MCD), and type 6 (census tract).
+          schema:
+            type: string
+            pattern: '^\d{2}$'
+            example: '11'
+        - name: entityId
+          in: query
+          required: false
+          description: >-
+            Geographic entity identifier. For counties, use the 3-digit
+            county FIPS code. For places, use the 5-digit FIPS place code.
+            For census tracts, use the 11-digit FIPS tract code.
+          schema:
+            type: string
+            example: '001'
+        - name: year
+          in: query
+          required: false
+          description: >-
+            Data year. CHAS data is published periodically as ACS
+            5-year estimates become available.
+          schema:
+            type: integer
+            example: 2019
+      responses:
+        '200':
+          description: Successful response with CHAS data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CHASResponse'
+        '401':
+          description: Unauthorized - missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No CHAS data found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer token obtained by registering at
+        https://www.huduser.gov/hudapi/public/register
+  schemas:
+    CHASRecord:
+      type: object
+      description: CHAS housing needs data record
+      properties:
+        geoname:
+          type: string
+          description: Geographic area name
+          example: 'District of Columbia'
+        sumlevel:
+          type: string
+          description: Summary level code for the geography
+          example: '040'
+        year:
+          type: string
+          description: ACS 5-year estimate period (e.g., 2015-2019)
+          example: '2015-2019'
+        A1:
+          type: integer
+          description: Total households
+        A2:
+          type: integer
+          description: Owner-occupied households
+        A3:
+          type: integer
+          description: Renter-occupied households
+        T1_est:
+          type: integer
+          description: Total households with housing problems estimate
+        T1_moe:
+          type: number
+          description: Total households with housing problems margin of error
+        T2_est:
+          type: integer
+          description: Extremely Low Income (<=30% AMI) households with housing problems
+        T2_moe:
+          type: number
+          description: ELI households with housing problems margin of error
+        T3_est:
+          type: integer
+          description: Very Low Income (30-50% AMI) households with housing problems
+        T3_moe:
+          type: number
+          description: VLI households with housing problems margin of error
+        T4_est:
+          type: integer
+          description: Low Income (50-80% AMI) households with housing problems
+        T4_moe:
+          type: number
+          description: LI households with housing problems margin of error
+    CHASResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CHASRecord'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: 'Unauthorized access. Please provide a valid bearer token.'

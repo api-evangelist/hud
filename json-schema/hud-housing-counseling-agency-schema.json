@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hud/main/json-schema/hud-housing-counseling-agency-schema.json",
+  "title": "HUD Housing Counseling Agency",
+  "description": "Schema for a HUD-approved housing counseling agency returned by the Housing Counselor Search API",
+  "type": "object",
+  "properties": {
+    "nme": {
+      "type": "string",
+      "description": "Agency name"
+    },
+    "agcid": {
+      "type": "string",
+      "description": "HUD agency identifier"
+    },
+    "parentid": {
+      "type": ["string", "null"],
+      "description": "Parent organization agency ID if applicable"
+    },
+    "adr1": {
+      "type": "string",
+      "description": "Primary street address"
+    },
+    "adr2": {
+      "type": ["string", "null"],
+      "description": "Secondary address line"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "statecd": {
+      "type": "string",
+      "description": "Two-letter state code",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "zipcd": {
+      "type": "string",
+      "description": "ZIP code (may include +4)"
+    },
+    "county_NME": {
+      "type": "string",
+      "description": "County name"
+    },
+    "state_NME": {
+      "type": "string",
+      "description": "Full state name"
+    },
+    "state_FIPS_CODE": {
+      "type": ["string", "null"],
+      "description": "State FIPS code"
+    },
+    "mailingadr1": {
+      "type": "string",
+      "description": "Mailing address line 1"
+    },
+    "mailingadr2": {
+      "type": ["string", "null"],
+      "description": "Mailing address line 2"
+    },
+    "mailingcity": {
+      "type": "string",
+      "description": "Mailing city"
+    },
+    "mailingstatecd": {
+      "type": "string",
+      "description": "Mailing state code"
+    },
+    "mailingzipcd": {
+      "type": "string",
+      "description": "Mailing ZIP code"
+    },
+    "phone1": {
+      "type": "string",
+      "description": "Primary phone number"
+    },
+    "phone2": {
+      "type": ["string", "null"],
+      "description": "Secondary phone number"
+    },
+    "fax": {
+      "type": ["string", "null"],
+      "description": "Fax number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Agency email address"
+    },
+    "weburl": {
+      "type": "string",
+      "description": "Agency website URL"
+    },
+    "agc_ADDR_LATITUDE": {
+      "type": "string",
+      "description": "Geographic latitude of agency address"
+    },
+    "agc_ADDR_LONGITUDE": {
+      "type": "string",
+      "description": "Geographic longitude of agency address"
+    },
+    "agc_STATUS": {
+      "type": "string",
+      "description": "Agency status",
+      "enum": ["A", "P", "S"]
+    },
+    "agc_SRC_CD": {
+      "type": "string",
+      "description": "Agency source code"
+    },
+    "languages": {
+      "type": "string",
+      "description": "Comma-separated language codes (ENG, SPA, CHI, FRE, FAR, POR, OTH)"
+    },
+    "faithbased": {
+      "type": "string",
+      "description": "Whether agency is faith-based",
+      "enum": ["Y", "N"]
+    },
+    "colonias_IND": {
+      "type": "string",
+      "description": "Whether agency serves colonias communities",
+      "enum": ["Y", "N"]
+    },
+    "migrantwkrs_IND": {
+      "type": "string",
+      "description": "Whether agency serves migrant workers",
+      "enum": ["Y", "N"]
+    },
+    "counslg_METHOD": {
+      "type": "string",
+      "description": "Comma-separated counseling methods offered"
+    },
+    "services": {
+      "type": ["string", "null"],
+      "description": "Comma-separated service codes (DFC, FBC, HIC, HMC, NDW, PPC, PPW, RHC, PLW, FHW, FBW)"
+    }
+  },
+  "required": ["nme", "agcid", "adr1", "city", "statecd", "zipcd", "agc_STATUS"]
+}

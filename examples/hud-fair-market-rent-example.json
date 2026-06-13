@@ -1,0 +1,18 @@
+{
+  "data": {
+    "area_name": "Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area",
+    "area_code": "METRO47900M47900",
+    "county_name": "District of Columbia",
+    "counties_msa": "District of Columbia, DC",
+    "year": "2024",
+    "fmr_type": 40,
+    "smallarea_status": "0",
+    "basicdata": {
+      "Efficiency": 1673,
+      "One-Bedroom": 1910,
+      "Two-Bedroom": 2212,
+      "Three-Bedroom": 2851,
+      "Four-Bedroom": 3199
+    }
+  }
+}
