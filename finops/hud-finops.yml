@@ -1,0 +1,44 @@
+name: HUD API FinOps
+description: >-
+  Financial operations guidance for HUD public APIs. All HUD User APIs and the
+  Housing Counselor Search API are free government data services with no
+  monetary cost. FinOps considerations are limited to infrastructure and
+  engineering costs incurred by API consumers.
+costModel:
+  type: Free Government Service
+  directCost: $0.00
+  costPerRequest: $0.00
+  costPerMonth: $0.00
+  notes: >-
+    HUD APIs are funded by the U.S. Department of Housing and Urban Development
+    as a public data service. There are no fees for registration, token
+    issuance, or API usage at any volume within rate limits.
+consumerCosts:
+  description: >-
+    While HUD APIs are free, API consumers should account for their own
+    infrastructure and engineering costs.
+  categories:
+    - name: Engineering Integration
+      description: One-time cost to build and maintain API integrations
+      costDriver: Developer hours for integration, testing, and maintenance
+    - name: Compute
+      description: Cloud or on-premises compute to call APIs and process responses
+      costDriver: Request volume; HUD data changes infrequently so caching reduces costs
+    - name: Storage
+      description: Storing cached or archived HUD dataset responses
+      costDriver: Minimal; JSON responses are compact
+    - name: Monitoring
+      description: Observability tooling to detect rate limit hits or API downtime
+      costDriver: Standard API monitoring costs apply
+optimizationTips:
+  - Cache Fair Market Rents and Income Limits data locally; values change only annually
+  - Schedule data refreshes at fiscal year boundaries (typically October 1)
+  - Use state-level batch endpoints instead of per-county calls where available
+  - Share a single HUD User token across services to consolidate rate limit tracking
+  - Monitor for HTTP 429 responses and implement exponential backoff
+registration:
+  url: https://www.huduser.gov/hudapi/public/register
+  cost: Free
+  tokenManagement: Self-service via HUD User portal dashboard
+termsOfService: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+contact: OpenData@hud.gov

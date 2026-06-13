@@ -1,0 +1,45 @@
+name: HUD API Rate Limits
+description: >-
+  Rate limiting policies for HUD public APIs. HUD User dataset APIs enforce a
+  maximum of 1200 requests per minute per token. The Housing Counselor Search
+  API returns HTTP 429 when rate limits are exceeded but does not publish
+  specific numeric thresholds.
+rateLimits:
+  - api: HUD User Datasets API
+    description: >-
+      Applies to Fair Market Rents, Income Limits, USPS Crosswalk, and CHAS
+      endpoints under https://www.huduser.gov/hudapi/public/.
+    type: per-token
+    requests:
+      limit: 1200
+      period: minute
+    authentication: Bearer token (free registration required)
+    enforcement: HTTP 429 Too Many Requests when exceeded
+    notes: >-
+      Rate limit is per registered API token. Multiple tokens can be created
+      for the same account through the HUD User portal.
+  - api: Housing Counselor Search API
+    description: >-
+      Applies to the public search endpoint at
+      https://data.hud.gov/Housing_Counselor/search.
+    type: per-IP (assumed)
+    requests:
+      limit: unspecified
+      period: unspecified
+    authentication: None required
+    enforcement: HTTP 429 Too Many Requests when exceeded
+    notes: >-
+      Specific rate limit thresholds are not published. HTTP 429 is documented
+      as a possible response code. Contact Housing.counseling@hud.gov for
+      high-volume access questions.
+bestPractices:
+  - Cache responses locally to reduce repeat requests for static data
+  - Use year-specific queries to avoid unnecessary broad data pulls
+  - Batch geographic lookups where the API supports list parameters
+  - For Fair Market Rents and Income Limits, data changes only once per fiscal year
+contact: OpenData@hud.gov
+documentation:
+  - https://www.huduser.gov/portal/dataset/fmr-api.html
+  - https://www.huduser.gov/portal/dataset/uspszip-api.html
+  - https://www.huduser.gov/portal/dataset/chas-api.html
+  - https://data.hud.gov/housing_counseling.html

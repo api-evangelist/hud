@@ -1,0 +1,43 @@
+name: HUD API Plans and Pricing
+description: >-
+  HUD User APIs (Fair Market Rents, Income Limits, USPS Crosswalk, CHAS) are
+  provided free of charge as a public government service. Access requires
+  registration for a free bearer token at the HUD User portal. The Housing
+  Counselor Search API at data.hud.gov is fully public with no registration
+  required.
+plans:
+  - name: Free - HUD User Datasets API
+    description: >-
+      Free access to all HUD User dataset APIs including Fair Market Rents,
+      Income Limits, USPS ZIP Code Crosswalk, and CHAS data. Registration and
+      a free bearer token are required. No cost; funded as a public government
+      data service by the U.S. Department of Housing and Urban Development.
+    url: https://www.huduser.gov/hudapi/public/register
+    hasCost: false
+    hasFreeTrial: false
+    usageRequirements:
+      - Free registration at huduser.gov
+      - Bearer token obtained via HUD User portal
+      - Agreement to HUD User API Terms of Service
+    limits:
+      - type: Rate Limit
+        value: 1200 requests per minute
+    features:
+      - Fair Market Rents data (state, county, metro area)
+      - Income Limits at 30/50/80% AMI thresholds
+      - USPS ZIP Code crosswalk to census geographies
+      - CHAS housing affordability data
+      - All geographic entity lookups (states, counties, CBSAs)
+  - name: Free - Housing Counselor Search API
+    description: >-
+      Fully public API for searching HUD-approved housing counseling agencies.
+      No registration or API key required. Available at data.hud.gov.
+    url: https://data.hud.gov/housing_counseling.html
+    hasCost: false
+    hasFreeTrial: false
+    features:
+      - Search by agency name, city, state
+      - Search by geographic coordinates and distance
+      - Returns HUD-approved counseling agency details
+termsOfService: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+contact: OpenData@hud.gov

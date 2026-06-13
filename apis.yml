@@ -1,0 +1,136 @@
+aid: hud
+name: HUD - US Department of Housing and Urban Development
+description: >-
+  The U.S. Department of Housing and Urban Development (HUD) provides public REST
+  APIs for fair housing data, Fair Market Rents, Income Limits, USPS ZIP code crosswalk
+  files, Comprehensive Housing Affordability Strategy (CHAS) data, and housing counseling
+  agency search. All HUD User dataset APIs require a free bearer token obtained from
+  the HUD User portal; the Housing Counselor search API is publicly accessible without
+  authentication.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/hud/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Housing
+  - Government
+  - Fair Market Rent
+  - Mortgage
+  - Community Development
+  - Public Housing
+  - Section 8
+  - Income Limits
+apis:
+  - name: HUD User Fair Market Rents API
+    description: >-
+      Provides Fair Market Rent (FMR) data by state, county, and metropolitan
+      area. Returns efficiency through four-bedroom rental rates used as the
+      basis for Section 8 Housing Choice Voucher payment standards.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.huduser.gov/portal/dataset/fmr-api.html
+    baseURL: https://www.huduser.gov/hudapi/public/fmr
+    tags:
+      - Fair Market Rent
+      - Housing
+      - Section 8
+    properties:
+      - type: Documentation
+        url: https://www.huduser.gov/portal/dataset/fmr-api.html
+      - type: Authentication
+        url: https://www.huduser.gov/hudapi/public/register
+  - name: HUD User Income Limits API
+    description: >-
+      Returns HUD Income Limits at 30%, 50%, and 80% of Area Median Income (AMI)
+      thresholds by geographic area. Used to determine eligibility for HUD
+      housing assistance programs.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.huduser.gov/portal/dataset/api.html
+    baseURL: https://www.huduser.gov/hudapi/public/il
+    tags:
+      - Income Limits
+      - Housing Assistance
+      - AMI
+    properties:
+      - type: Documentation
+        url: https://www.huduser.gov/portal/dataset/api.html
+      - type: Authentication
+        url: https://www.huduser.gov/hudapi/public/register
+  - name: HUD User USPS ZIP Code Crosswalk API
+    description: >-
+      Maps USPS ZIP codes to and from census tracts, counties, CBSAs,
+      congressional districts, and county subdivisions. Supports geographic
+      lookups and crosswalk queries for housing analysis.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.huduser.gov/portal/dataset/uspszip-api.html
+    baseURL: https://www.huduser.gov/hudapi/public/usps
+    tags:
+      - ZIP Code
+      - Crosswalk
+      - Geography
+      - Census
+    properties:
+      - type: Documentation
+        url: https://www.huduser.gov/portal/dataset/uspszip-api.html
+      - type: Authentication
+        url: https://www.huduser.gov/hudapi/public/register
+  - name: HUD User CHAS API
+    description: >-
+      Comprehensive Housing Affordability Strategy (CHAS) data provides custom
+      tabulations of American Community Survey data on housing needs at national,
+      state, county, and municipal levels. Used for Consolidated Planning submissions.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.huduser.gov/portal/dataset/chas-api.html
+    baseURL: https://www.huduser.gov/hudapi/public/chas
+    tags:
+      - CHAS
+      - Housing Affordability
+      - Community Planning
+      - ACS
+    properties:
+      - type: Documentation
+        url: https://www.huduser.gov/portal/dataset/chas-api.html
+      - type: Authentication
+        url: https://www.huduser.gov/hudapi/public/register
+  - name: HUD Housing Counselor Search API
+    description: >-
+      Search for HUD-approved housing counseling agencies by name, city, state,
+      or geographic coordinates. Returns agency contact information and services
+      offered. No API key required.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://data.hud.gov/housing_counseling.html
+    baseURL: https://data.hud.gov/Housing_Counselor/search
+    tags:
+      - Housing Counseling
+      - Agency Search
+      - Public
+    properties:
+      - type: Documentation
+        url: https://data.hud.gov/housing_counseling.html
+common:
+  - type: Website
+    url: https://www.hud.gov/
+  - type: Documentation
+    url: https://www.huduser.gov/portal/dataset/api.html
+  - type: GitHubOrg
+    url: https://github.com/HUD-Data-Lab
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/us-department-of-housing-and-urban-development/
+  - type: Blog
+    url: https://www.hud.gov/press/blog
+  - type: Pricing
+    url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+  - type: StatusPage
+    url: https://data.hud.gov/
+  - type: X
+    url: https://x.com/HUDgov
+  - type: Plans
+    url: plans/hud-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/hud-rate-limits.yml
+  - type: FinOps
+    url: finops/hud-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
