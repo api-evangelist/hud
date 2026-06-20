@@ -8,7 +8,7 @@ description: >-
   the HUD User portal; the Housing Counselor search API is publicly accessible without
   authentication.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/hud/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -28,7 +28,7 @@ apis:
       Provides Fair Market Rent (FMR) data by state, county, and metropolitan
       area. Returns efficiency through four-bedroom rental rates used as the
       basis for Section 8 Housing Choice Voucher payment standards.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.huduser.gov/portal/dataset/fmr-api.html
     baseURL: https://www.huduser.gov/hudapi/public/fmr
     tags:
@@ -45,7 +45,7 @@ apis:
       Returns HUD Income Limits at 30%, 50%, and 80% of Area Median Income (AMI)
       thresholds by geographic area. Used to determine eligibility for HUD
       housing assistance programs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.huduser.gov/portal/dataset/api.html
     baseURL: https://www.huduser.gov/hudapi/public/il
     tags:
@@ -62,7 +62,7 @@ apis:
       Maps USPS ZIP codes to and from census tracts, counties, CBSAs,
       congressional districts, and county subdivisions. Supports geographic
       lookups and crosswalk queries for housing analysis.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.huduser.gov/portal/dataset/uspszip-api.html
     baseURL: https://www.huduser.gov/hudapi/public/usps
     tags:
@@ -80,7 +80,7 @@ apis:
       Comprehensive Housing Affordability Strategy (CHAS) data provides custom
       tabulations of American Community Survey data on housing needs at national,
       state, county, and municipal levels. Used for Consolidated Planning submissions.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.huduser.gov/portal/dataset/chas-api.html
     baseURL: https://www.huduser.gov/hudapi/public/chas
     tags:
@@ -98,7 +98,7 @@ apis:
       Search for HUD-approved housing counseling agencies by name, city, state,
       or geographic coordinates. Returns agency contact information and services
       offered. No API key required.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://data.hud.gov/housing_counseling.html
     baseURL: https://data.hud.gov/Housing_Counselor/search
     tags:
