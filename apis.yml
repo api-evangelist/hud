@@ -109,6 +109,10 @@ apis:
       - type: Documentation
         url: https://data.hud.gov/housing_counseling.html
 common:
+  - type: DomainSecurity
+    url: security/hud-domain-security.yml
+  - type: Authentication
+    url: authentication/hud-authentication.yml
   - type: Website
     url: https://www.hud.gov/
   - type: Documentation

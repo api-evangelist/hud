@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/hud-chas-openapi.yml, openapi/hud-fair-market-rents-openapi.yml, openapi/hud-income-limits-openapi.yml,
+  openapi/hud-usps-zip-code-crosswalk-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Bearer token obtained by registering at https://www.huduser.gov/hudapi/public/register
+  sources:
+  - openapi/hud-chas-openapi.yml
+  - openapi/hud-fair-market-rents-openapi.yml
+  - openapi/hud-income-limits-openapi.yml
+  - openapi/hud-usps-zip-code-crosswalk-openapi.yml
