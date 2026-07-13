@@ -2,11 +2,10 @@
   "repo": "hud",
   "feeds": [
     {
-      "source": "https://www.hud.gov/press/blog",
-      "saved": 0,
-      "error": "404 Not Found on blog url and tried alternates (/press, /about/news)"
+      "source": "https://www.linkedin.com/company/us-department-of-housing-and-urban-development/",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T12:46:32Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0
 }
