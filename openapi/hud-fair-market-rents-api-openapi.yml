@@ -1,11 +1,7 @@
 openapi: 3.0.3
 info:
-  title: HUD User Fair Market Rents API
-  description: >-
-    Provides Fair Market Rent (FMR) data by state, county, and metropolitan
-    area. Returns efficiency through four-bedroom rental rates used as the
-    basis for Section 8 Housing Choice Voucher payment standards. Requires
-    a free bearer token obtained from the HUD User portal.
+  title: HUD User CHAS Fair Market Rents API
+  description: Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.
   version: 1.0.0
   contact:
     name: HUD User Support
@@ -14,43 +10,37 @@ info:
     name: Public Domain
     url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
 servers:
-  - url: https://www.huduser.gov/hudapi/public
-    description: HUD User Public API
-externalDocs:
-  description: HUD User Fair Market Rents API Documentation
-  url: https://www.huduser.gov/portal/dataset/fmr-api.html
+- url: https://www.huduser.gov/hudapi/public
+  description: HUD User Public API
 security:
-  - bearerAuth: []
+- bearerAuth: []
 tags:
-  - name: Fair Market Rents
-    description: Fair Market Rent data by geography
+- name: Fair Market Rents
+  description: Fair Market Rent data by geography
 paths:
   /fmr/statedata/{state}:
     get:
       summary: Get Fair Market Rents by State
-      description: >-
-        Returns Fair Market Rent data for all counties and metropolitan
-        areas within the specified state. FMRs cover efficiency through
-        four-bedroom unit sizes.
+      description: Returns Fair Market Rent data for all counties and metropolitan areas within the specified state. FMRs cover efficiency through four-bedroom unit sizes.
       operationId: getFMRByState
       tags:
-        - Fair Market Rents
+      - Fair Market Rents
       parameters:
-        - name: state
-          in: path
-          required: true
-          description: Two-letter state abbreviation (e.g., AL, CA, TX)
-          schema:
-            type: string
-            pattern: '^[A-Z]{2}$'
-            example: DC
-        - name: year
-          in: query
-          required: false
-          description: Fiscal year for FMR data (e.g., 2024). Defaults to the most recent year.
-          schema:
-            type: integer
-            example: 2024
+      - name: state
+        in: path
+        required: true
+        description: Two-letter state abbreviation (e.g., AL, CA, TX)
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+          example: DC
+      - name: year
+        in: query
+        required: false
+        description: Fiscal year for FMR data (e.g., 2024). Defaults to the most recent year.
+        schema:
+          type: integer
+          example: 2024
       responses:
         '200':
           description: Successful response with FMR data for the state
@@ -73,29 +63,25 @@ paths:
   /fmr/data/{entityid}:
     get:
       summary: Get Fair Market Rents by Entity
-      description: >-
-        Returns Fair Market Rent data for a specific geographic entity
-        identified by its HUD entity ID (county FIPS code or CBSA code).
+      description: Returns Fair Market Rent data for a specific geographic entity identified by its HUD entity ID (county FIPS code or CBSA code).
       operationId: getFMRByEntity
       tags:
-        - Fair Market Rents
+      - Fair Market Rents
       parameters:
-        - name: entityid
-          in: path
-          required: true
-          description: >-
-            HUD geographic entity identifier. For counties, use the
-            5-digit FIPS code. For metropolitan areas, use the CBSA code.
-          schema:
-            type: string
-            example: '1100199999'
-        - name: year
-          in: query
-          required: false
-          description: Fiscal year for FMR data
-          schema:
-            type: integer
-            example: 2024
+      - name: entityid
+        in: path
+        required: true
+        description: HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code.
+        schema:
+          type: string
+          example: '1100199999'
+      - name: year
+        in: query
+        required: false
+        description: Fiscal year for FMR data
+        schema:
+          type: integer
+          example: 2024
       responses:
         '200':
           description: Successful response with FMR data
@@ -116,14 +102,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: >-
-        Bearer token obtained by registering at
-        https://www.huduser.gov/hudapi/public/register
   schemas:
+    FMREntityResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FMRArea'
+    FMRStateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            metroareas:
+              type: array
+              items:
+                $ref: '#/components/schemas/FMRArea'
+            counties:
+              type: array
+              items:
+                $ref: '#/components/schemas/FMRArea'
     FMRUnit:
       type: object
       description: Fair Market Rent values by unit size
@@ -148,6 +146,13 @@ components:
           type: number
           description: Fair Market Rent for a four-bedroom unit in USD
           example: 2600
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
     FMRArea:
       type: object
       description: FMR data for a geographic area
@@ -155,15 +160,15 @@ components:
         area_name:
           type: string
           description: Name of the geographic area
-          example: 'Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area'
+          example: Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area
         area_code:
           type: string
           description: HUD area code
-          example: 'METRO47900M47900'
+          example: METRO47900M47900
         county_name:
           type: string
           description: County name if applicable
-          example: 'District of Columbia'
+          example: District of Columbia
         counties_msa:
           type: string
           description: Counties within the MSA
@@ -178,32 +183,16 @@ components:
         smallarea_status:
           type: string
           description: Indicates if small area FMRs are applicable
-          enum: ['0', '1']
+          enum:
+          - '0'
+          - '1'
         basicdata:
           $ref: '#/components/schemas/FMRUnit'
-    FMRStateResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            metroareas:
-              type: array
-              items:
-                $ref: '#/components/schemas/FMRArea'
-            counties:
-              type: array
-              items:
-                $ref: '#/components/schemas/FMRArea'
-    FMREntityResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/FMRArea'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: 'Unauthorized access. Please provide a valid bearer token.'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token obtained by registering at https://www.huduser.gov/hudapi/public/register
+externalDocs:
+  description: HUD User CHAS API Documentation
+  url: https://www.huduser.gov/portal/dataset/chas-api.html

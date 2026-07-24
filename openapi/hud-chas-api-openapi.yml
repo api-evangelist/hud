@@ -1,12 +1,7 @@
 openapi: 3.0.3
 info:
   title: HUD User CHAS API
-  description: >-
-    Comprehensive Housing Affordability Strategy (CHAS) data provides custom
-    tabulations of American Community Survey (ACS) data on housing needs at
-    national, state, county, place, and census tract levels. CHAS data is
-    used for Consolidated Planning submissions required to receive HUD formula
-    grant funds. Requires a free bearer token obtained from the HUD User portal.
+  description: Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.
   version: 1.0.0
   contact:
     name: HUD User Support
@@ -15,75 +10,53 @@ info:
     name: Public Domain
     url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
 servers:
-  - url: https://www.huduser.gov/hudapi/public
-    description: HUD User Public API
-externalDocs:
-  description: HUD User CHAS API Documentation
-  url: https://www.huduser.gov/portal/dataset/chas-api.html
+- url: https://www.huduser.gov/hudapi/public
+  description: HUD User Public API
 security:
-  - bearerAuth: []
+- bearerAuth: []
 tags:
-  - name: CHAS
-    description: Comprehensive Housing Affordability Strategy data
+- name: CHAS
+  description: Comprehensive Housing Affordability Strategy data
 paths:
   /chas:
     get:
       summary: Get CHAS Data by Geography
-      description: >-
-        Returns CHAS housing needs data for a specified geography at
-        a given geographic level. Supports national, state, county,
-        place, MCD (Minor Civil Division), and census tract geographies.
-        Data includes household housing problems by income level and
-        tenure (owner vs. renter).
+      description: Returns CHAS housing needs data for a specified geography at a given geographic level. Supports national, state, county, place, MCD (Minor Civil Division), and census tract geographies. Data includes household housing problems by income level and tenure (owner vs. renter).
       operationId: getCHASData
       tags:
-        - CHAS
+      - CHAS
       parameters:
-        - name: type
-          in: query
-          required: true
-          description: >-
-            Geographic level type:
-            1 = National,
-            2 = State,
-            3 = County,
-            4 = Place (incorporated city/town),
-            5 = Minor Civil Division (MCD),
-            6 = Census Tract
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 6
-            example: 3
-        - name: stateId
-          in: query
-          required: false
-          description: >-
-            2-digit state FIPS code. Required for type 3 (county),
-            type 4 (place), type 5 (MCD), and type 6 (census tract).
-          schema:
-            type: string
-            pattern: '^\d{2}$'
-            example: '11'
-        - name: entityId
-          in: query
-          required: false
-          description: >-
-            Geographic entity identifier. For counties, use the 3-digit
-            county FIPS code. For places, use the 5-digit FIPS place code.
-            For census tracts, use the 11-digit FIPS tract code.
-          schema:
-            type: string
-            example: '001'
-        - name: year
-          in: query
-          required: false
-          description: >-
-            Data year. CHAS data is published periodically as ACS
-            5-year estimates become available.
-          schema:
-            type: integer
-            example: 2019
+      - name: type
+        in: query
+        required: true
+        description: 'Geographic level type: 1 = National, 2 = State, 3 = County, 4 = Place (incorporated city/town), 5 = Minor Civil Division (MCD), 6 = Census Tract'
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 6
+          example: 3
+      - name: stateId
+        in: query
+        required: false
+        description: 2-digit state FIPS code. Required for type 3 (county), type 4 (place), type 5 (MCD), and type 6 (census tract).
+        schema:
+          type: string
+          pattern: ^\d{2}$
+          example: '11'
+      - name: entityId
+        in: query
+        required: false
+        description: Geographic entity identifier. For counties, use the 3-digit county FIPS code. For places, use the 5-digit FIPS place code. For census tracts, use the 11-digit FIPS tract code.
+        schema:
+          type: string
+          example: '001'
+      - name: year
+        in: query
+        required: false
+        description: Data year. CHAS data is published periodically as ACS 5-year estimates become available.
+        schema:
+          type: integer
+          example: 2019
       responses:
         '200':
           description: Successful response with CHAS data
@@ -110,14 +83,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: >-
-        Bearer token obtained by registering at
-        https://www.huduser.gov/hudapi/public/register
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
     CHASRecord:
       type: object
       description: CHAS housing needs data record
@@ -125,7 +98,7 @@ components:
         geoname:
           type: string
           description: Geographic area name
-          example: 'District of Columbia'
+          example: District of Columbia
         sumlevel:
           type: string
           description: Summary level code for the geography
@@ -133,7 +106,7 @@ components:
         year:
           type: string
           description: ACS 5-year estimate period (e.g., 2015-2019)
-          example: '2015-2019'
+          example: 2015-2019
         A1:
           type: integer
           description: Total households
@@ -174,10 +147,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CHASRecord'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: 'Unauthorized access. Please provide a valid bearer token.'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token obtained by registering at https://www.huduser.gov/hudapi/public/register
+externalDocs:
+  description: HUD User CHAS API Documentation
+  url: https://www.huduser.gov/portal/dataset/chas-api.html
