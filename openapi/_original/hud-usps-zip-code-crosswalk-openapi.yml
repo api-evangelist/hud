@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: HUD User USPS ZIP Code Crosswalk API
+  description: >-
+    Maps USPS ZIP codes to and from census tracts, counties, CBSAs (Core
+    Based Statistical Areas), congressional districts, and county
+    subdivisions. Supports geographic lookups and crosswalk queries for
+    housing analysis and policy research. Requires a free bearer token
+    obtained from the HUD User portal.
+  version: 1.0.0
+  contact:
+    name: HUD User Support
+    url: https://www.huduser.gov/portal/contact.html
+  license:
+    name: Public Domain
+    url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+servers:
+  - url: https://www.huduser.gov/hudapi/public
+    description: HUD User Public API
+externalDocs:
+  description: HUD User USPS ZIP Code Crosswalk API Documentation
+  url: https://www.huduser.gov/portal/dataset/uspszip-api.html
+security:
+  - bearerAuth: []
+tags:
+  - name: ZIP Code Crosswalk
+    description: ZIP code to geographic area crosswalk queries
+paths:
+  /usps:
+    get:
+      summary: ZIP Code Crosswalk Query
+      description: >-
+        Returns crosswalk data mapping ZIP codes to and from other
+        geographic units. Supports multiple crosswalk types including
+        ZIP-to-county, ZIP-to-census tract, ZIP-to-CBSA,
+        ZIP-to-congressional district, and ZIP-to-county subdivision.
+      operationId: getZIPCrosswalk
+      tags:
+        - ZIP Code Crosswalk
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: >-
+            Crosswalk type code:
+            1 = ZIP to County,
+            2 = ZIP to Census Tract,
+            3 = ZIP to CBSA,
+            4 = ZIP to Congressional District,
+            5 = County to ZIP,
+            6 = Census Tract to ZIP,
+            7 = CBSA to ZIP,
+            8 = Congressional District to ZIP,
+            9 = ZIP to County Subdivision,
+            10 = County Subdivision to ZIP
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+            example: 1
+        - name: query
+          in: query
+          required: true
+          description: >-
+            The geographic identifier to look up. For ZIP-to-X queries,
+            provide the 5-digit ZIP code. For X-to-ZIP queries, provide
+            the appropriate geographic code (e.g., 5-digit FIPS for county,
+            11-digit FIPS for census tract, CBSA code, etc.)
+          schema:
+            type: string
+            example: '20001'
+        - name: year
+          in: query
+          required: false
+          description: Year for crosswalk data (2nd quarter data)
+          schema:
+            type: integer
+            example: 2023
+        - name: quarter
+          in: query
+          required: false
+          description: Quarter for crosswalk data (1-4)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 4
+            example: 4
+      responses:
+        '200':
+          description: Successful response with crosswalk data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrosswalkResponse'
+        '401':
+          description: Unauthorized - missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No crosswalk data found for the given query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer token obtained by registering at
+        https://www.huduser.gov/hudapi/public/register
+  schemas:
+    CrosswalkRecord:
+      type: object
+      description: A single crosswalk mapping record
+      properties:
+        zip:
+          type: string
+          description: 5-digit USPS ZIP code
+          example: '20001'
+        county:
+          type: string
+          description: 5-digit county FIPS code
+          example: '11001'
+        geoid:
+          type: string
+          description: Geographic identifier for the target geography
+          example: '11001'
+        tract:
+          type: string
+          description: Census tract code (11-digit FIPS)
+          example: '11001000100'
+        cbsa:
+          type: string
+          description: CBSA (Core Based Statistical Area) code
+          example: '47900'
+        cd:
+          type: string
+          description: Congressional district code
+          example: '1100098'
+        res_ratio:
+          type: number
+          description: Ratio of residential addresses in the ZIP that map to this geography
+          example: 0.85
+        bus_ratio:
+          type: number
+          description: Ratio of business addresses in the ZIP that map to this geography
+          example: 0.90
+        oth_ratio:
+          type: number
+          description: Ratio of other addresses in the ZIP that map to this geography
+          example: 0.80
+        tot_ratio:
+          type: number
+          description: Ratio of total addresses in the ZIP that map to this geography
+          example: 0.86
+    CrosswalkResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/CrosswalkRecord'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: 'Unauthorized access. Please provide a valid bearer token.'

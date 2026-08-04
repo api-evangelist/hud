@@ -1,0 +1,225 @@
+openapi: 3.0.3
+info:
+  title: HUD User Income Limits API
+  description: >-
+    Returns HUD Income Limits at 30%, 50%, and 80% of Area Median Income (AMI)
+    thresholds by geographic area. Used to determine eligibility for HUD
+    housing assistance programs including Section 8, HOME, and CDBG.
+    Requires a free bearer token obtained from the HUD User portal.
+  version: 1.0.0
+  contact:
+    name: HUD User Support
+    url: https://www.huduser.gov/portal/contact.html
+  license:
+    name: Public Domain
+    url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+servers:
+  - url: https://www.huduser.gov/hudapi/public
+    description: HUD User Public API
+externalDocs:
+  description: HUD User Income Limits API Documentation
+  url: https://www.huduser.gov/portal/dataset/api.html
+security:
+  - bearerAuth: []
+tags:
+  - name: Income Limits
+    description: Area Median Income limits by geography
+paths:
+  /il/data/{entityid}:
+    get:
+      summary: Get Income Limits by Entity
+      description: >-
+        Returns HUD Income Limits for a specific geographic entity at
+        30%, 50%, and 80% of Area Median Income (AMI) by household
+        size (1-8 persons).
+      operationId: getIncomeLimitsByEntity
+      tags:
+        - Income Limits
+      parameters:
+        - name: entityid
+          in: path
+          required: true
+          description: >-
+            HUD geographic entity identifier. For counties, use the
+            5-digit FIPS code. For metropolitan areas, use the CBSA code.
+            For states, use the 2-digit FIPS code.
+          schema:
+            type: string
+            example: '1100199999'
+        - name: year
+          in: query
+          required: false
+          description: Fiscal year for income limit data
+          schema:
+            type: integer
+            example: 2024
+      responses:
+        '200':
+          description: Successful response with income limit data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeLimitResponse'
+        '401':
+          description: Unauthorized - missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Entity not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /il/statedata/{state}:
+    get:
+      summary: Get Income Limits by State
+      description: >-
+        Returns income limit data for all geographic areas within
+        the specified state, including counties and metropolitan areas.
+      operationId: getIncomeLimitsByState
+      tags:
+        - Income Limits
+      parameters:
+        - name: state
+          in: path
+          required: true
+          description: Two-letter state abbreviation (e.g., CA, TX, NY)
+          schema:
+            type: string
+            pattern: '^[A-Z]{2}$'
+            example: DC
+        - name: year
+          in: query
+          required: false
+          description: Fiscal year for income limit data
+          schema:
+            type: integer
+            example: 2024
+      responses:
+        '200':
+          description: Successful response with state income limit data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeLimitStateResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: State not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer token obtained by registering at
+        https://www.huduser.gov/hudapi/public/register
+  schemas:
+    IncomeLimitByHouseholdSize:
+      type: object
+      description: Income limit values by household size (1-8 persons)
+      properties:
+        l1:
+          type: integer
+          description: Income limit for 1-person household in USD
+          example: 35950
+        l2:
+          type: integer
+          description: Income limit for 2-person household in USD
+          example: 41100
+        l3:
+          type: integer
+          description: Income limit for 3-person household in USD
+          example: 46200
+        l4:
+          type: integer
+          description: Income limit for 4-person household in USD
+          example: 51350
+        l5:
+          type: integer
+          description: Income limit for 5-person household in USD
+          example: 55450
+        l6:
+          type: integer
+          description: Income limit for 6-person household in USD
+          example: 59600
+        l7:
+          type: integer
+          description: Income limit for 7-person household in USD
+          example: 63700
+        l8:
+          type: integer
+          description: Income limit for 8-person household in USD
+          example: 67800
+    IncomeLimitArea:
+      type: object
+      description: Income limit data for a geographic area
+      properties:
+        area_name:
+          type: string
+          description: Name of the geographic area
+          example: 'Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area'
+        area_code:
+          type: string
+          description: HUD area code
+          example: 'METRO47900M47900'
+        county_name:
+          type: string
+          description: County name if applicable
+        state_name:
+          type: string
+          description: State name
+          example: 'District of Columbia'
+        year:
+          type: string
+          description: Fiscal year for the income limit data
+          example: '2024'
+        median_income:
+          type: integer
+          description: Area Median Income (AMI) in USD
+          example: 143300
+        VeryLow:
+          description: Income limits at 50% of AMI (Very Low Income)
+          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+        ExtVeryLow:
+          description: Income limits at 30% of AMI (Extremely Low Income)
+          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+        Low:
+          description: Income limits at 80% of AMI (Low Income)
+          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+    IncomeLimitResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/IncomeLimitArea'
+    IncomeLimitStateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            metroareas:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
+            counties:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: 'Unauthorized access. Please provide a valid bearer token.'

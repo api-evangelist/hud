@@ -1,0 +1,299 @@
+openapi: 3.0.3
+info:
+  title: HUD Housing Counselor Search API
+  description: >-
+    Search for HUD-approved housing counseling agencies by name, city, state,
+    or geographic coordinates. Returns agency contact information, services
+    offered, counseling methods, and languages supported. This API is publicly
+    accessible without authentication.
+  version: 1.0.0
+  contact:
+    name: HUD Data
+    url: https://data.hud.gov/housing_counseling.html
+  license:
+    name: Public Domain
+    url: https://www.hud.gov/aboutus/privacy-policy
+servers:
+  - url: https://data.hud.gov
+    description: HUD Data Portal
+externalDocs:
+  description: HUD Housing Counseling Search Documentation
+  url: https://data.hud.gov/housing_counseling.html
+tags:
+  - name: Housing Counseling
+    description: HUD-approved housing counseling agency search
+paths:
+  /Housing_Counselor/search:
+    get:
+      summary: Search Housing Counseling Agencies by Name/Location
+      description: >-
+        Search for HUD-approved housing counseling agencies by agency name,
+        city, and/or state. Returns a list of agencies matching the search
+        criteria with full contact and service information. No API key required.
+      operationId: searchHousingCounselors
+      tags:
+        - Housing Counseling
+      parameters:
+        - name: AgencyName
+          in: query
+          required: false
+          description: Full or partial agency name to search for
+          schema:
+            type: string
+            example: 'Community Housing'
+        - name: City
+          in: query
+          required: false
+          description: City name to filter results
+          schema:
+            type: string
+            example: 'Washington'
+        - name: State
+          in: query
+          required: false
+          description: Two-letter state abbreviation to filter results
+          schema:
+            type: string
+            pattern: '^[A-Z]{2}$'
+            example: 'DC'
+      responses:
+        '200':
+          description: Successful response with matching agencies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HousingCounselingAgency'
+              example:
+                - nme: 'UNIVERSITY LEGAL SERVICES'
+                  phone1: '202-527-7070'
+                  statecd: 'DC'
+                  weburl: 'https://www.uls-dc.org/'
+                  zipcd: '20019-3402'
+                  agc_ADDR_LATITUDE: '38.894443'
+                  agc_ADDR_LONGITUDE: '-76.948045'
+                  languages: 'ENG'
+                  agcid: '90489'
+                  adr1: '3939 Benning Rd NE'
+                  city: 'WASHINGTON'
+                  agc_STATUS: 'P'
+                  counslg_METHOD: 'Face to Face Counseling,Group Counseling,Phone Counseling,Video Conference'
+                  services: 'DFC,FBC,HIC,HMC,NDW,PPC,PPW,RHC'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /Housing_Counselor/searchByLocation:
+    get:
+      summary: Search Housing Counseling Agencies by Location
+      description: >-
+        Search for HUD-approved housing counseling agencies near a specified
+        geographic location (latitude/longitude) within a given distance radius.
+        Returns agencies sorted by proximity to the search coordinates.
+      operationId: searchHousingCounselorsByLocation
+      tags:
+        - Housing Counseling
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude of the search center point (decimal degrees)
+          schema:
+            type: number
+            format: double
+            minimum: -90
+            maximum: 90
+            example: 38.9
+        - name: long
+          in: query
+          required: true
+          description: Longitude of the search center point (decimal degrees)
+          schema:
+            type: number
+            format: double
+            minimum: -180
+            maximum: 180
+            example: -77.0
+        - name: distance
+          in: query
+          required: false
+          description: Search radius in miles (default is typically 5 miles)
+          schema:
+            type: number
+            default: 5
+            example: 10
+      responses:
+        '200':
+          description: Successful response with nearby agencies sorted by distance
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HousingCounselingAgency'
+        '400':
+          description: Bad request - missing or invalid coordinates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    HousingCounselingAgency:
+      type: object
+      description: HUD-approved housing counseling agency
+      properties:
+        nme:
+          type: string
+          description: Agency name
+          example: 'UNIVERSITY LEGAL SERVICES'
+        agcid:
+          type: string
+          description: HUD agency identifier
+          example: '90489'
+        parentid:
+          type: string
+          nullable: true
+          description: Parent organization agency ID if applicable
+          example: '80219'
+        adr1:
+          type: string
+          description: Primary address line
+          example: '3939 Benning Rd NE'
+        adr2:
+          type: string
+          nullable: true
+          description: Secondary address line
+        city:
+          type: string
+          description: City
+          example: 'WASHINGTON'
+        statecd:
+          type: string
+          description: Two-letter state code
+          example: 'DC'
+        zipcd:
+          type: string
+          description: ZIP code
+          example: '20019-3402'
+        county_NME:
+          type: string
+          description: County name
+        state_NME:
+          type: string
+          description: Full state name
+          example: 'District of Columbia'
+        state_FIPS_CODE:
+          type: string
+          nullable: true
+          description: State FIPS code
+        mailingadr1:
+          type: string
+          description: Mailing address line 1
+        mailingadr2:
+          type: string
+          nullable: true
+          description: Mailing address line 2
+        mailingcity:
+          type: string
+          description: Mailing city
+        mailingstatecd:
+          type: string
+          description: Mailing state code
+        mailingzipcd:
+          type: string
+          description: Mailing ZIP code
+        phone1:
+          type: string
+          description: Primary phone number
+          example: '202-527-7070'
+        phone2:
+          type: string
+          nullable: true
+          description: Secondary phone number
+        fax:
+          type: string
+          nullable: true
+          description: Fax number
+        email:
+          type: string
+          description: Agency email address
+          example: 'info@agency.org'
+        weburl:
+          type: string
+          description: Agency website URL
+          example: 'https://www.uls-dc.org/'
+        agc_ADDR_LATITUDE:
+          type: string
+          description: Geographic latitude of agency address
+          example: '38.894443'
+        agc_ADDR_LONGITUDE:
+          type: string
+          description: Geographic longitude of agency address
+          example: '-76.948045'
+        agc_STATUS:
+          type: string
+          description: Agency status (A = Active, P = Probationary, S = Suspended)
+          enum: ['A', 'P', 'S']
+          example: 'A'
+        agc_SRC_CD:
+          type: string
+          description: Agency source code
+          example: 'HUD'
+        languages:
+          type: string
+          description: >-
+            Comma-separated language codes supported by the agency.
+            Common codes: ENG (English), SPA (Spanish), CHI (Chinese),
+            FRE (French), FAR (Farsi), POR (Portuguese), OTH (Other).
+          example: 'ENG,SPA'
+        faithbased:
+          type: string
+          description: Whether agency is faith-based (Y/N)
+          enum: ['Y', 'N']
+          example: 'N'
+        colonias_IND:
+          type: string
+          description: Whether agency serves colonias communities (Y/N)
+          enum: ['Y', 'N']
+          example: 'N'
+        migrantwkrs_IND:
+          type: string
+          description: Whether agency serves migrant workers (Y/N)
+          enum: ['Y', 'N']
+          example: 'N'
+        counslg_METHOD:
+          type: string
+          description: >-
+            Comma-separated list of counseling methods offered.
+            Options include: Face to Face Counseling, Group Counseling,
+            Phone Counseling, Internet Counseling, Video Conference,
+            Other Counseling.
+          example: 'Face to Face Counseling,Phone Counseling,Video Conference'
+        services:
+          type: string
+          nullable: true
+          description: >-
+            Comma-separated service codes offered by the agency.
+            Common codes: DFC (Default/Foreclosure Counseling),
+            FBC (Fair Housing/Buying Counseling),
+            HIC (Home Improvement Counseling),
+            HMC (Home Maintenance Counseling),
+            NDW (Non-Delinquency Post-Purchase Counseling Workshop),
+            PPC (Pre-Purchase Counseling),
+            PPW (Pre-Purchase Homebuyer Education Workshop),
+            RHC (Rental Housing Counseling),
+            PLW (Predatory Lending Workshop),
+            FHW (Fair Housing Pre-Purchase Education Workshop),
+            FBW (Financial Management/Budget Counseling Workshop).
+          example: 'DFC,FBC,HIC,HMC,PPC,PPW,RHC'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: 'Bad request - invalid parameters provided'

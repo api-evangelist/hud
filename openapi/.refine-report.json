@@ -1,0 +1,22 @@
+{
+  "provider": "hud",
+  "sources": [
+    "hud-chas-api-openapi.yml",
+    "hud-fair-market-rents-api-openapi.yml",
+    "hud-housing-counseling-api-openapi.yml",
+    "hud-income-limits-api-openapi.yml",
+    "hud-zip-code-crosswalk-api-openapi.yml"
+  ],
+  "outputs": [
+    "hud-chas-api-openapi.yml",
+    "hud-fair-market-rents-api-openapi.yml",
+    "hud-housing-counseling-api-openapi.yml",
+    "hud-income-limits-api-openapi.yml",
+    "hud-zip-code-crosswalk-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
