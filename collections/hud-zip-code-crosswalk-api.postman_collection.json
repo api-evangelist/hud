@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "de92ebfa-1e0e-4f1b-a583-2fa2c0bf4e3a",
+      "name": "ZIP Code Crosswalk",
+      "description": {
+        "content": "ZIP code to geographic area crosswalk queries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04f001fb-08d3-458a-b1ab-015480379639",
+          "name": "ZIP Code Crosswalk Query",
+          "request": {
+            "name": "ZIP Code Crosswalk Query",
+            "description": {
+              "content": "Returns crosswalk data mapping ZIP codes to and from other geographic units. Supports multiple crosswalk types including ZIP-to-county, ZIP-to-census tract, ZIP-to-CBSA, ZIP-to-congressional district, and ZIP-to-county subdivision.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>",
+                  "description": "(Required) Crosswalk type code: 1 = ZIP to County, 2 = ZIP to Census Tract, 3 = ZIP to CBSA, 4 = ZIP to Congressional District, 5 = County to ZIP, 6 = Census Tract to ZIP, 7 = CBSA to ZIP, 8 = Congressional District to ZIP, 9 = ZIP to County Subdivision, 10 = County Subdivision to ZIP"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The geographic identifier to look up. For ZIP-to-X queries, provide the 5-digit ZIP code. For X-to-ZIP queries, provide the appropriate geographic code (e.g., 5-digit FIPS for county, 11-digit FIPS for census tract, CBSA code, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Year for crosswalk data (2nd quarter data)"
+                },
+                {
+                  "disabled": false,
+                  "key": "quarter",
+                  "value": "<integer>",
+                  "description": "Quarter for crosswalk data (1-4)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17e446c2-bc9b-4a44-b0f3-85ac6aecd885",
+              "name": "Successful response with crosswalk data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "20001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2023"
+                    },
+                    {
+                      "key": "quarter",
+                      "value": "4"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"results\": [\n      {\n        \"zip\": \"20001\",\n        \"county\": \"11001\",\n        \"geoid\": \"11001\",\n        \"tract\": \"11001000100\",\n        \"cbsa\": \"47900\",\n        \"cd\": \"1100098\",\n        \"res_ratio\": 0.85,\n        \"bus_ratio\": 0.9,\n        \"oth_ratio\": 0.8,\n        \"tot_ratio\": 0.86\n      },\n      {\n        \"zip\": \"20001\",\n        \"county\": \"11001\",\n        \"geoid\": \"11001\",\n        \"tract\": \"11001000100\",\n        \"cbsa\": \"47900\",\n        \"cd\": \"1100098\",\n        \"res_ratio\": 0.85,\n        \"bus_ratio\": 0.9,\n        \"oth_ratio\": 0.8,\n        \"tot_ratio\": 0.86\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3179028d-29e2-4101-8cdc-030ae753e0b2",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "20001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2023"
+                    },
+                    {
+                      "key": "quarter",
+                      "value": "4"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c47734b9-21b0-49f0-a2d3-1d4a2f918fc3",
+              "name": "Unauthorized - missing or invalid bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "20001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2023"
+                    },
+                    {
+                      "key": "quarter",
+                      "value": "4"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b547476-f4d9-419b-a294-2b35bef5e726",
+              "name": "No crosswalk data found for the given query",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "20001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2023"
+                    },
+                    {
+                      "key": "quarter",
+                      "value": "4"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.huduser.gov/hudapi/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e66f4f7e-ed52-4047-8594-a2088aa5af68",
+    "name": "HUD User CHAS ZIP Code Crosswalk API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.\n\nContact Support:\n Name: HUD User Support",
+      "type": "text/plain"
+    }
+  }
+}

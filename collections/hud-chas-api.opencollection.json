@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HUD User CHAS API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CHAS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get CHAS Data by Geography",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/chas",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level type: 1 = National, 2 = State, 3 = County, 4 = Place (incorporated city/town), 5 = Minor Civil Division (MCD), 6 = Census Tract"
+              },
+              {
+                "name": "stateId",
+                "value": "",
+                "type": "query",
+                "description": "2-digit state FIPS code. Required for type 3 (county), type 4 (place), type 5 (MCD), and type 6 (census tract)."
+              },
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "query",
+                "description": "Geographic entity identifier. For counties, use the 3-digit county FIPS code. For places, use the 5-digit FIPS place code. For census tracts, use the 11-digit FIPS tract code."
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Data year. CHAS data is published periodically as ACS 5-year estimates become available."
+              }
+            ]
+          },
+          "docs": "Returns CHAS housing needs data for a specified geography at a given geographic level. Supports national, state, county, place, MCD (Minor Civil Division), and census tract geographies. Data includes household housing problems by income level and tenure (owner vs. renter)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

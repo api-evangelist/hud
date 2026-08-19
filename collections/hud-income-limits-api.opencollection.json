@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HUD User CHAS Income Limits API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Income Limits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Income Limits by Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/il/data/:entityid",
+            "params": [
+              {
+                "name": "entityid",
+                "value": "",
+                "type": "path",
+                "description": "HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code. For states, use the 2-digit FIPS code."
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Fiscal year for income limit data"
+              }
+            ]
+          },
+          "docs": "Returns HUD Income Limits for a specific geographic entity at 30%, 50%, and 80% of Area Median Income (AMI) by household size (1-8 persons)."
+        },
+        {
+          "info": {
+            "name": "Get Income Limits by State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/il/statedata/:state",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter state abbreviation (e.g., CA, TX, NY)"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Fiscal year for income limit data"
+              }
+            ]
+          },
+          "docs": "Returns income limit data for all geographic areas within the specified state, including counties and metropolitan areas."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

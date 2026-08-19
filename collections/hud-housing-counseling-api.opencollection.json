@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HUD User CHAS Housing Counseling API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Housing Counseling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Housing Counseling Agencies by Name/Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/Housing_Counselor/search",
+            "params": [
+              {
+                "name": "AgencyName",
+                "value": "",
+                "type": "query",
+                "description": "Full or partial agency name to search for"
+              },
+              {
+                "name": "City",
+                "value": "",
+                "type": "query",
+                "description": "City name to filter results"
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter state abbreviation to filter results"
+              }
+            ]
+          },
+          "docs": "Search for HUD-approved housing counseling agencies by agency name, city, and/or state. Returns a list of agencies matching the search criteria with full contact and service information. No API key required."
+        },
+        {
+          "info": {
+            "name": "Search Housing Counseling Agencies by Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/Housing_Counselor/searchByLocation",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center point (decimal degrees)"
+              },
+              {
+                "name": "long",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center point (decimal degrees)"
+              },
+              {
+                "name": "distance",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles (default is typically 5 miles)"
+              }
+            ]
+          },
+          "docs": "Search for HUD-approved housing counseling agencies near a specified geographic location (latitude/longitude) within a given distance radius. Returns agencies sorted by proximity to the search coordinates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,379 @@
+{
+  "item": [
+    {
+      "id": "fbd21dd5-35c6-4d9b-a6f2-d8a28c393448",
+      "name": "Housing Counseling",
+      "description": {
+        "content": "HUD-approved housing counseling agency search",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b957f121-1dbb-43e4-b2d7-ca69ca2cb956",
+          "name": "Search Housing Counseling Agencies by Name/Location",
+          "request": {
+            "name": "Search Housing Counseling Agencies by Name/Location",
+            "description": {
+              "content": "Search for HUD-approved housing counseling agencies by agency name, city, and/or state. Returns a list of agencies matching the search criteria with full contact and service information. No API key required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Housing_Counselor",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "AgencyName",
+                  "value": "<string>",
+                  "description": "Full or partial agency name to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "City",
+                  "value": "<string>",
+                  "description": "City name to filter results"
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Two-letter state abbreviation to filter results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45cd1115-fc59-4a46-a7f6-4fa84e295087",
+              "name": "Successful response with matching agencies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Housing_Counselor",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AgencyName",
+                      "value": "Community Housing"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Washington"
+                    },
+                    {
+                      "key": "State",
+                      "value": "DC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"nme\": \"UNIVERSITY LEGAL SERVICES\",\n    \"phone1\": \"202-527-7070\",\n    \"statecd\": \"DC\",\n    \"weburl\": \"https://www.uls-dc.org/\",\n    \"zipcd\": \"20019-3402\",\n    \"agc_ADDR_LATITUDE\": \"38.894443\",\n    \"agc_ADDR_LONGITUDE\": \"-76.948045\",\n    \"languages\": \"ENG\",\n    \"agcid\": \"90489\",\n    \"adr1\": \"3939 Benning Rd NE\",\n    \"city\": \"WASHINGTON\",\n    \"agc_STATUS\": \"P\",\n    \"counslg_METHOD\": \"Face to Face Counseling,Group Counseling,Phone Counseling,Video Conference\",\n    \"services\": \"DFC,FBC,HIC,HMC,NDW,PPC,PPW,RHC\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b666acaf-fa5d-4b8b-9465-8a6adbbedd4a",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Housing_Counselor",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AgencyName",
+                      "value": "Community Housing"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Washington"
+                    },
+                    {
+                      "key": "State",
+                      "value": "DC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bad request - invalid parameters provided\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f8223ba-db04-4aee-a217-6511d663b976",
+          "name": "Search Housing Counseling Agencies by Location",
+          "request": {
+            "name": "Search Housing Counseling Agencies by Location",
+            "description": {
+              "content": "Search for HUD-approved housing counseling agencies near a specified geographic location (latitude/longitude) within a given distance radius. Returns agencies sorted by proximity to the search coordinates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Housing_Counselor",
+                "searchByLocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude of the search center point (decimal degrees)"
+                },
+                {
+                  "disabled": false,
+                  "key": "long",
+                  "value": "<double>",
+                  "description": "(Required) Longitude of the search center point (decimal degrees)"
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "5",
+                  "description": "Search radius in miles (default is typically 5 miles)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "539a286f-ea29-423f-b8a3-b9b477645ccc",
+              "name": "Successful response with nearby agencies sorted by distance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Housing_Counselor",
+                    "searchByLocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "38.9"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-77"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"nme\": \"UNIVERSITY LEGAL SERVICES\",\n    \"agcid\": \"90489\",\n    \"parentid\": \"80219\",\n    \"adr1\": \"3939 Benning Rd NE\",\n    \"adr2\": \"string\",\n    \"city\": \"WASHINGTON\",\n    \"statecd\": \"DC\",\n    \"zipcd\": \"20019-3402\",\n    \"county_NME\": \"string\",\n    \"state_NME\": \"District of Columbia\",\n    \"state_FIPS_CODE\": \"string\",\n    \"mailingadr1\": \"string\",\n    \"mailingadr2\": \"string\",\n    \"mailingcity\": \"string\",\n    \"mailingstatecd\": \"string\",\n    \"mailingzipcd\": \"string\",\n    \"phone1\": \"202-527-7070\",\n    \"phone2\": \"string\",\n    \"fax\": \"string\",\n    \"email\": \"info@agency.org\",\n    \"weburl\": \"https://www.uls-dc.org/\",\n    \"agc_ADDR_LATITUDE\": \"38.894443\",\n    \"agc_ADDR_LONGITUDE\": \"-76.948045\",\n    \"agc_STATUS\": \"A\",\n    \"agc_SRC_CD\": \"HUD\",\n    \"languages\": \"ENG,SPA\",\n    \"faithbased\": \"N\",\n    \"colonias_IND\": \"N\",\n    \"migrantwkrs_IND\": \"N\",\n    \"counslg_METHOD\": \"Face to Face Counseling,Phone Counseling,Video Conference\",\n    \"services\": \"DFC,FBC,HIC,HMC,PPC,PPW,RHC\"\n  },\n  {\n    \"nme\": \"UNIVERSITY LEGAL SERVICES\",\n    \"agcid\": \"90489\",\n    \"parentid\": \"80219\",\n    \"adr1\": \"3939 Benning Rd NE\",\n    \"adr2\": \"string\",\n    \"city\": \"WASHINGTON\",\n    \"statecd\": \"DC\",\n    \"zipcd\": \"20019-3402\",\n    \"county_NME\": \"string\",\n    \"state_NME\": \"District of Columbia\",\n    \"state_FIPS_CODE\": \"string\",\n    \"mailingadr1\": \"string\",\n    \"mailingadr2\": \"string\",\n    \"mailingcity\": \"string\",\n    \"mailingstatecd\": \"string\",\n    \"mailingzipcd\": \"string\",\n    \"phone1\": \"202-527-7070\",\n    \"phone2\": \"string\",\n    \"fax\": \"string\",\n    \"email\": \"info@agency.org\",\n    \"weburl\": \"https://www.uls-dc.org/\",\n    \"agc_ADDR_LATITUDE\": \"38.894443\",\n    \"agc_ADDR_LONGITUDE\": \"-76.948045\",\n    \"agc_STATUS\": \"A\",\n    \"agc_SRC_CD\": \"HUD\",\n    \"languages\": \"ENG,SPA\",\n    \"faithbased\": \"N\",\n    \"colonias_IND\": \"N\",\n    \"migrantwkrs_IND\": \"N\",\n    \"counslg_METHOD\": \"Face to Face Counseling,Phone Counseling,Video Conference\",\n    \"services\": \"DFC,FBC,HIC,HMC,PPC,PPW,RHC\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16b7e444-ad3c-460c-a26d-c9e347bb2a83",
+              "name": "Bad request - missing or invalid coordinates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Housing_Counselor",
+                    "searchByLocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "38.9"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-77"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bad request - invalid parameters provided\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.huduser.gov/hudapi/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "934375ed-ac9d-4eb4-b744-2275cf6b0c4a",
+    "name": "HUD User CHAS Housing Counseling API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.\n\nContact Support:\n Name: HUD User Support",
+      "type": "text/plain"
+    }
+  }
+}

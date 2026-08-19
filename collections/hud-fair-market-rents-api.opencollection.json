@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HUD User CHAS Fair Market Rents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fair Market Rents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Fair Market Rents by State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/fmr/statedata/:state",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter state abbreviation (e.g., AL, CA, TX)"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Fiscal year for FMR data (e.g., 2024). Defaults to the most recent year."
+              }
+            ]
+          },
+          "docs": "Returns Fair Market Rent data for all counties and metropolitan areas within the specified state. FMRs cover efficiency through four-bedroom unit sizes."
+        },
+        {
+          "info": {
+            "name": "Get Fair Market Rents by Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/fmr/data/:entityid",
+            "params": [
+              {
+                "name": "entityid",
+                "value": "",
+                "type": "path",
+                "description": "HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code."
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Fiscal year for FMR data"
+              }
+            ]
+          },
+          "docs": "Returns Fair Market Rent data for a specific geographic entity identified by its HUD entity ID (county FIPS code or CBSA code)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HUD User CHAS ZIP Code Crosswalk API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ZIP Code Crosswalk",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ZIP Code Crosswalk Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.huduser.gov/hudapi/public/usps",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Crosswalk type code: 1 = ZIP to County, 2 = ZIP to Census Tract, 3 = ZIP to CBSA, 4 = ZIP to Congressional District, 5 = County to ZIP, 6 = Census Tract to ZIP, 7 = CBSA to ZIP, 8 = Congressional District to ZIP, 9 = ZIP to County Subdivision, 10 = County Subdivision to ZIP"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The geographic identifier to look up. For ZIP-to-X queries, provide the 5-digit ZIP code. For X-to-ZIP queries, provide the appropriate geographic code (e.g., 5-digit FIPS for county, 11-digit FIPS for census tract, CBSA code, etc.)"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Year for crosswalk data (2nd quarter data)"
+              },
+              {
+                "name": "quarter",
+                "value": "",
+                "type": "query",
+                "description": "Quarter for crosswalk data (1-4)"
+              }
+            ]
+          },
+          "docs": "Returns crosswalk data mapping ZIP codes to and from other geographic units. Supports multiple crosswalk types including ZIP-to-county, ZIP-to-census tract, ZIP-to-CBSA, ZIP-to-congressional district, and ZIP-to-county subdivision."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

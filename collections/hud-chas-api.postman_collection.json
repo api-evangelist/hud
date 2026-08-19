@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "eadd128d-64f2-4312-9b65-e7ea6a2042ec",
+      "name": "CHAS",
+      "description": {
+        "content": "Comprehensive Housing Affordability Strategy data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a37eab60-0096-4e03-b397-53bdc2b75ef7",
+          "name": "Get CHAS Data by Geography",
+          "request": {
+            "name": "Get CHAS Data by Geography",
+            "description": {
+              "content": "Returns CHAS housing needs data for a specified geography at a given geographic level. Supports national, state, county, place, MCD (Minor Civil Division), and census tract geographies. Data includes household housing problems by income level and tenure (owner vs. renter).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>",
+                  "description": "(Required) Geographic level type: 1 = National, 2 = State, 3 = County, 4 = Place (incorporated city/town), 5 = Minor Civil Division (MCD), 6 = Census Tract"
+                },
+                {
+                  "disabled": false,
+                  "key": "stateId",
+                  "value": "<string>",
+                  "description": "2-digit state FIPS code. Required for type 3 (county), type 4 (place), type 5 (MCD), and type 6 (census tract)."
+                },
+                {
+                  "disabled": false,
+                  "key": "entityId",
+                  "value": "<string>",
+                  "description": "Geographic entity identifier. For counties, use the 3-digit county FIPS code. For places, use the 5-digit FIPS place code. For census tracts, use the 11-digit FIPS tract code."
+                },
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Data year. CHAS data is published periodically as ACS 5-year estimates become available."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56e29b9a-0643-4de2-9815-a08acaeea53d",
+              "name": "Successful response with CHAS data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "3"
+                    },
+                    {
+                      "key": "stateId",
+                      "value": "11"
+                    },
+                    {
+                      "key": "entityId",
+                      "value": "001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2019"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"geoname\": \"District of Columbia\",\n      \"sumlevel\": \"040\",\n      \"year\": \"2015-2019\",\n      \"A1\": 5459,\n      \"A2\": 1151,\n      \"A3\": 2914,\n      \"T1_est\": 3255,\n      \"T1_moe\": 1495.0580635175693,\n      \"T2_est\": 6527,\n      \"T2_moe\": 4766.4274386872285,\n      \"T3_est\": 7306,\n      \"T3_moe\": 2319.5888615643357,\n      \"T4_est\": 7046,\n      \"T4_moe\": 4217.475014017356\n    },\n    {\n      \"geoname\": \"District of Columbia\",\n      \"sumlevel\": \"040\",\n      \"year\": \"2015-2019\",\n      \"A1\": 6670,\n      \"A2\": 3345,\n      \"A3\": 6791,\n      \"T1_est\": 9440,\n      \"T1_moe\": 5146.320312183514,\n      \"T2_est\": 3472,\n      \"T2_moe\": 5730.1435503737985,\n      \"T3_est\": 3742,\n      \"T3_moe\": 6340.276576083876,\n      \"T4_est\": 1820,\n      \"T4_moe\": 9020.23920717427\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "728b2b29-3f4d-4bf1-83e5-58c4aadd3ffa",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "3"
+                    },
+                    {
+                      "key": "stateId",
+                      "value": "11"
+                    },
+                    {
+                      "key": "entityId",
+                      "value": "001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2019"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ebc2499-931c-4ed3-bf69-828c9d168f03",
+              "name": "Unauthorized - missing or invalid bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "3"
+                    },
+                    {
+                      "key": "stateId",
+                      "value": "11"
+                    },
+                    {
+                      "key": "entityId",
+                      "value": "001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2019"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ec729bc-feda-4204-87d9-422f875617d9",
+              "name": "No CHAS data found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "3"
+                    },
+                    {
+                      "key": "stateId",
+                      "value": "11"
+                    },
+                    {
+                      "key": "entityId",
+                      "value": "001"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2019"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.huduser.gov/hudapi/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10943a04-7003-4108-9bce-78fc7bf9c8c2",
+    "name": "HUD User CHAS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.\n\nContact Support:\n Name: HUD User Support",
+      "type": "text/plain"
+    }
+  }
+}

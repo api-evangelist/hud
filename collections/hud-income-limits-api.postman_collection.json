@@ -1,0 +1,493 @@
+{
+  "item": [
+    {
+      "id": "8f00e05c-98b2-42d3-a98b-e68969620718",
+      "name": "Income Limits",
+      "description": {
+        "content": "Area Median Income limits by geography",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "612bead7-dc32-4f14-a19d-bf13e6888f3d",
+          "name": "Get Income Limits by Entity",
+          "request": {
+            "name": "Get Income Limits by Entity",
+            "description": {
+              "content": "Returns HUD Income Limits for a specific geographic entity at 30%, 50%, and 80% of Area Median Income (AMI) by household size (1-8 persons).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "il",
+                "data",
+                ":entityid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Fiscal year for income limit data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityid",
+                  "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code. For states, use the 2-digit FIPS code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a16e51d-f6c2-4efb-bb4b-4d32de352940",
+              "name": "Successful response with income limit data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "il",
+                    "data",
+                    ":entityid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityid",
+                      "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code. For states, use the 2-digit FIPS code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n    \"area_code\": \"METRO47900M47900\",\n    \"county_name\": \"string\",\n    \"state_name\": \"District of Columbia\",\n    \"year\": \"2024\",\n    \"median_income\": 143300,\n    \"VeryLow\": {\n      \"l1\": 35950,\n      \"l2\": 41100,\n      \"l3\": 46200,\n      \"l4\": 51350,\n      \"l5\": 55450,\n      \"l6\": 59600,\n      \"l7\": 63700,\n      \"l8\": 67800\n    },\n    \"ExtVeryLow\": {\n      \"l1\": 35950,\n      \"l2\": 41100,\n      \"l3\": 46200,\n      \"l4\": 51350,\n      \"l5\": 55450,\n      \"l6\": 59600,\n      \"l7\": 63700,\n      \"l8\": 67800\n    },\n    \"Low\": {\n      \"l1\": 35950,\n      \"l2\": 41100,\n      \"l3\": 46200,\n      \"l4\": 51350,\n      \"l5\": 55450,\n      \"l6\": 59600,\n      \"l7\": 63700,\n      \"l8\": 67800\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dae6b87-8609-4eed-9acf-0e9aadd85a4a",
+              "name": "Unauthorized - missing or invalid bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "il",
+                    "data",
+                    ":entityid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityid",
+                      "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code. For states, use the 2-digit FIPS code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69ea26f7-3068-4d74-a4d3-3f07519501b0",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "il",
+                    "data",
+                    ":entityid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityid",
+                      "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code. For states, use the 2-digit FIPS code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf427fd1-fafa-4176-9ea0-5a018a032423",
+          "name": "Get Income Limits by State",
+          "request": {
+            "name": "Get Income Limits by State",
+            "description": {
+              "content": "Returns income limit data for all geographic areas within the specified state, including counties and metropolitan areas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "il",
+                "statedata",
+                ":state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Fiscal year for income limit data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "state",
+                  "description": "(Required) Two-letter state abbreviation (e.g., CA, TX, NY)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "871220f4-bcf9-4ef9-a4ee-3cd18be65ba6",
+              "name": "Successful response with state income limit data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "il",
+                    "statedata",
+                    ":state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) Two-letter state abbreviation (e.g., CA, TX, NY)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"metroareas\": [\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"string\",\n        \"state_name\": \"District of Columbia\",\n        \"year\": \"2024\",\n        \"median_income\": 143300,\n        \"VeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"ExtVeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"Low\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        }\n      },\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"string\",\n        \"state_name\": \"District of Columbia\",\n        \"year\": \"2024\",\n        \"median_income\": 143300,\n        \"VeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"ExtVeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"Low\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        }\n      }\n    ],\n    \"counties\": [\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"string\",\n        \"state_name\": \"District of Columbia\",\n        \"year\": \"2024\",\n        \"median_income\": 143300,\n        \"VeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"ExtVeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"Low\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        }\n      },\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"string\",\n        \"state_name\": \"District of Columbia\",\n        \"year\": \"2024\",\n        \"median_income\": 143300,\n        \"VeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"ExtVeryLow\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        },\n        \"Low\": {\n          \"l1\": 35950,\n          \"l2\": 41100,\n          \"l3\": 46200,\n          \"l4\": 51350,\n          \"l5\": 55450,\n          \"l6\": 59600,\n          \"l7\": 63700,\n          \"l8\": 67800\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5c33764-3ac4-4c97-b65b-46bac7e99e64",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "il",
+                    "statedata",
+                    ":state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) Two-letter state abbreviation (e.g., CA, TX, NY)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c351c2ca-2cc7-4070-bf28-37e3c66c4d97",
+              "name": "State not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "il",
+                    "statedata",
+                    ":state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) Two-letter state abbreviation (e.g., CA, TX, NY)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.huduser.gov/hudapi/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "29e2dd93-f134-417f-8557-36da96c1dbc3",
+    "name": "HUD User CHAS Income Limits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.\n\nContact Support:\n Name: HUD User Support",
+      "type": "text/plain"
+    }
+  }
+}

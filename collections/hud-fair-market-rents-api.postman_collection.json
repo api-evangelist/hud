@@ -1,0 +1,493 @@
+{
+  "item": [
+    {
+      "id": "2064beab-da92-4756-99db-60d39619524c",
+      "name": "Fair Market Rents",
+      "description": {
+        "content": "Fair Market Rent data by geography",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e4848f3-158d-45e7-82c0-448c5bb2c038",
+          "name": "Get Fair Market Rents by State",
+          "request": {
+            "name": "Get Fair Market Rents by State",
+            "description": {
+              "content": "Returns Fair Market Rent data for all counties and metropolitan areas within the specified state. FMRs cover efficiency through four-bedroom unit sizes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fmr",
+                "statedata",
+                ":state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Fiscal year for FMR data (e.g., 2024). Defaults to the most recent year."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "state",
+                  "description": "(Required) Two-letter state abbreviation (e.g., AL, CA, TX)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5560f68b-c04a-4e0c-8eb1-be54c34e86b8",
+              "name": "Successful response with FMR data for the state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fmr",
+                    "statedata",
+                    ":state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) Two-letter state abbreviation (e.g., AL, CA, TX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"metroareas\": [\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"District of Columbia\",\n        \"counties_msa\": \"string\",\n        \"year\": \"2024\",\n        \"fmr_type\": 40,\n        \"smallarea_status\": \"0\",\n        \"basicdata\": {\n          \"Efficiency\": 1200,\n          \"One-Bedroom\": 1450,\n          \"Two-Bedroom\": 1700,\n          \"Three-Bedroom\": 2200,\n          \"Four-Bedroom\": 2600\n        }\n      },\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"District of Columbia\",\n        \"counties_msa\": \"string\",\n        \"year\": \"2024\",\n        \"fmr_type\": 40,\n        \"smallarea_status\": \"1\",\n        \"basicdata\": {\n          \"Efficiency\": 1200,\n          \"One-Bedroom\": 1450,\n          \"Two-Bedroom\": 1700,\n          \"Three-Bedroom\": 2200,\n          \"Four-Bedroom\": 2600\n        }\n      }\n    ],\n    \"counties\": [\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"District of Columbia\",\n        \"counties_msa\": \"string\",\n        \"year\": \"2024\",\n        \"fmr_type\": 40,\n        \"smallarea_status\": \"0\",\n        \"basicdata\": {\n          \"Efficiency\": 1200,\n          \"One-Bedroom\": 1450,\n          \"Two-Bedroom\": 1700,\n          \"Three-Bedroom\": 2200,\n          \"Four-Bedroom\": 2600\n        }\n      },\n      {\n        \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n        \"area_code\": \"METRO47900M47900\",\n        \"county_name\": \"District of Columbia\",\n        \"counties_msa\": \"string\",\n        \"year\": \"2024\",\n        \"fmr_type\": 40,\n        \"smallarea_status\": \"0\",\n        \"basicdata\": {\n          \"Efficiency\": 1200,\n          \"One-Bedroom\": 1450,\n          \"Two-Bedroom\": 1700,\n          \"Three-Bedroom\": 2200,\n          \"Four-Bedroom\": 2600\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dd00429-2ea2-4576-a593-a32b37567e03",
+              "name": "Unauthorized - missing or invalid bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fmr",
+                    "statedata",
+                    ":state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) Two-letter state abbreviation (e.g., AL, CA, TX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ec97591-0ef4-400d-bdd3-6278496bceb0",
+              "name": "State not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fmr",
+                    "statedata",
+                    ":state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) Two-letter state abbreviation (e.g., AL, CA, TX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4695af55-2f1d-40ce-9bc0-7d6d808ba8a7",
+          "name": "Get Fair Market Rents by Entity",
+          "request": {
+            "name": "Get Fair Market Rents by Entity",
+            "description": {
+              "content": "Returns Fair Market Rent data for a specific geographic entity identified by its HUD entity ID (county FIPS code or CBSA code).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fmr",
+                "data",
+                ":entityid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Fiscal year for FMR data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityid",
+                  "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6055bb4e-096c-4baa-9ba4-1a8956477994",
+              "name": "Successful response with FMR data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fmr",
+                    "data",
+                    ":entityid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityid",
+                      "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"area_name\": \"Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area\",\n    \"area_code\": \"METRO47900M47900\",\n    \"county_name\": \"District of Columbia\",\n    \"counties_msa\": \"string\",\n    \"year\": \"2024\",\n    \"fmr_type\": 40,\n    \"smallarea_status\": \"0\",\n    \"basicdata\": {\n      \"Efficiency\": 1200,\n      \"One-Bedroom\": 1450,\n      \"Two-Bedroom\": 1700,\n      \"Three-Bedroom\": 2200,\n      \"Four-Bedroom\": 2600\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d048e307-7003-42d1-bc78-bbd250ffe5b4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fmr",
+                    "data",
+                    ":entityid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityid",
+                      "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afd2fc05-d83e-411c-a61f-c180adc6e9a1",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fmr",
+                    "data",
+                    ":entityid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityid",
+                      "description": "(Required) HUD geographic entity identifier. For counties, use the 5-digit FIPS code. For metropolitan areas, use the CBSA code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized access. Please provide a valid bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.huduser.gov/hudapi/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7de5a778-45f4-4ae5-9e2b-9e85438f5b12",
+    "name": "HUD User CHAS Fair Market Rents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.\n\nContact Support:\n Name: HUD User Support",
+      "type": "text/plain"
+    }
+  }
+}
