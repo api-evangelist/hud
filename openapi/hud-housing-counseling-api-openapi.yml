@@ -1,19 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: HUD User CHAS Housing Counseling API
-  description: Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.
+  title: HUD Housing Counselor Search Housing Counseling API
+  description: Search for HUD-approved housing counseling agencies by name, city, state, or geographic coordinates. Returns agency contact information, services offered, counseling methods, and languages supported. This API is publicly accessible without authentication.
   version: 1.0.0
   contact:
-    name: HUD User Support
-    url: https://www.huduser.gov/portal/contact.html
+    name: HUD Data
+    url: https://data.hud.gov/housing_counseling.html
   license:
     name: Public Domain
-    url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+    url: https://www.hud.gov/aboutus/privacy-policy
 servers:
-- url: https://www.huduser.gov/hudapi/public
-  description: HUD User Public API
-security:
-- bearerAuth: []
+- url: https://data.hud.gov
+  description: HUD Data Portal
 tags:
 - name: Housing Counseling
   description: HUD-approved housing counseling agency search
@@ -151,8 +149,9 @@ components:
           description: HUD agency identifier
           example: '90489'
         parentid:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Parent organization agency ID if applicable
           example: '80219'
         adr1:
@@ -160,8 +159,9 @@ components:
           description: Primary address line
           example: 3939 Benning Rd NE
         adr2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Secondary address line
         city:
           type: string
@@ -183,15 +183,17 @@ components:
           description: Full state name
           example: District of Columbia
         state_FIPS_CODE:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: State FIPS code
         mailingadr1:
           type: string
           description: Mailing address line 1
         mailingadr2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Mailing address line 2
         mailingcity:
           type: string
@@ -207,12 +209,14 @@ components:
           description: Primary phone number
           example: 202-527-7070
         phone2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Secondary phone number
         fax:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fax number
         email:
           type: string
@@ -272,15 +276,11 @@ components:
           description: 'Comma-separated list of counseling methods offered. Options include: Face to Face Counseling, Group Counseling, Phone Counseling, Internet Counseling, Video Conference, Other Counseling.'
           example: Face to Face Counseling,Phone Counseling,Video Conference
         services:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: 'Comma-separated service codes offered by the agency. Common codes: DFC (Default/Foreclosure Counseling), FBC (Fair Housing/Buying Counseling), HIC (Home Improvement Counseling), HMC (Home Maintenance Counseling), NDW (Non-Delinquency Post-Purchase Counseling Workshop), PPC (Pre-Purchase Counseling), PPW (Pre-Purchase Homebuyer Education Workshop), RHC (Rental Housing Counseling), PLW (Predatory Lending Workshop), FHW (Fair Housing Pre-Purchase Education Workshop), FBW (Financial Management/Budget Counseling Workshop).'
           example: DFC,FBC,HIC,HMC,PPC,PPW,RHC
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Bearer token obtained by registering at https://www.huduser.gov/hudapi/public/register
 externalDocs:
-  description: HUD User CHAS API Documentation
-  url: https://www.huduser.gov/portal/dataset/chas-api.html
+  description: HUD Housing Counseling Search Documentation
+  url: https://data.hud.gov/housing_counseling.html

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: HUD User CHAS API
   description: Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.
@@ -84,6 +84,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    CHASResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CHASRecord'
     ErrorResponse:
       type: object
       properties:
@@ -140,13 +147,6 @@ components:
         T4_moe:
           type: number
           description: LI households with housing problems margin of error
-    CHASResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CHASRecord'
   securitySchemes:
     bearerAuth:
       type: http

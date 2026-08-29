@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: HUD User CHAS Income Limits API
-  description: Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.
+  title: HUD User Income Limits API
+  description: Returns HUD Income Limits at 30%, 50%, and 80% of Area Median Income (AMI) thresholds by geographic area. Used to determine eligibility for HUD housing assistance programs including Section 8, HOME, and CDBG. Requires a free bearer token obtained from the HUD User portal.
   version: 1.0.0
   contact:
     name: HUD User Support
@@ -103,56 +103,11 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    IncomeLimitByHouseholdSize:
-      type: object
-      description: Income limit values by household size (1-8 persons)
-      properties:
-        l1:
-          type: integer
-          description: Income limit for 1-person household in USD
-          example: 35950
-        l2:
-          type: integer
-          description: Income limit for 2-person household in USD
-          example: 41100
-        l3:
-          type: integer
-          description: Income limit for 3-person household in USD
-          example: 46200
-        l4:
-          type: integer
-          description: Income limit for 4-person household in USD
-          example: 51350
-        l5:
-          type: integer
-          description: Income limit for 5-person household in USD
-          example: 55450
-        l6:
-          type: integer
-          description: Income limit for 6-person household in USD
-          example: 59600
-        l7:
-          type: integer
-          description: Income limit for 7-person household in USD
-          example: 63700
-        l8:
-          type: integer
-          description: Income limit for 8-person household in USD
-          example: 67800
-    IncomeLimitStateResponse:
+    IncomeLimitResponse:
       type: object
       properties:
         data:
-          type: object
-          properties:
-            metroareas:
-              type: array
-              items:
-                $ref: '#/components/schemas/IncomeLimitArea'
-            counties:
-              type: array
-              items:
-                $ref: '#/components/schemas/IncomeLimitArea'
+          $ref: '#/components/schemas/IncomeLimitArea'
     ErrorResponse:
       type: object
       properties:
@@ -160,11 +115,6 @@ components:
           type: string
           description: Error message
           example: Unauthorized access. Please provide a valid bearer token.
-    IncomeLimitResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/IncomeLimitArea'
     IncomeLimitArea:
       type: object
       description: Income limit data for a geographic area
@@ -201,11 +151,61 @@ components:
         Low:
           description: Income limits at 80% of AMI (Low Income)
           $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+    IncomeLimitStateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            metroareas:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
+            counties:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
+    IncomeLimitByHouseholdSize:
+      type: object
+      description: Income limit values by household size (1-8 persons)
+      properties:
+        l1:
+          type: integer
+          description: Income limit for 1-person household in USD
+          example: 35950
+        l2:
+          type: integer
+          description: Income limit for 2-person household in USD
+          example: 41100
+        l3:
+          type: integer
+          description: Income limit for 3-person household in USD
+          example: 46200
+        l4:
+          type: integer
+          description: Income limit for 4-person household in USD
+          example: 51350
+        l5:
+          type: integer
+          description: Income limit for 5-person household in USD
+          example: 55450
+        l6:
+          type: integer
+          description: Income limit for 6-person household in USD
+          example: 59600
+        l7:
+          type: integer
+          description: Income limit for 7-person household in USD
+          example: 63700
+        l8:
+          type: integer
+          description: Income limit for 8-person household in USD
+          example: 67800
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Bearer token obtained by registering at https://www.huduser.gov/hudapi/public/register
 externalDocs:
-  description: HUD User CHAS API Documentation
-  url: https://www.huduser.gov/portal/dataset/chas-api.html
+  description: HUD User Income Limits API Documentation
+  url: https://www.huduser.gov/portal/dataset/api.html

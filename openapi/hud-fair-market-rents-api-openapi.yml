@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: HUD User CHAS Fair Market Rents API
-  description: Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.
+  title: HUD User Fair Market Rents API
+  description: Provides Fair Market Rent (FMR) data by state, county, and metropolitan area. Returns efficiency through four-bedroom rental rates used as the basis for Section 8 Housing Choice Voucher payment standards. Requires a free bearer token obtained from the HUD User portal.
   version: 1.0.0
   contact:
     name: HUD User Support
@@ -103,11 +103,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    FMREntityResponse:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/FMRArea'
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
     FMRStateResponse:
       type: object
       properties:
@@ -122,37 +124,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/FMRArea'
-    FMRUnit:
-      type: object
-      description: Fair Market Rent values by unit size
-      properties:
-        Efficiency:
-          type: number
-          description: Fair Market Rent for an efficiency (studio) unit in USD
-          example: 1200
-        One-Bedroom:
-          type: number
-          description: Fair Market Rent for a one-bedroom unit in USD
-          example: 1450
-        Two-Bedroom:
-          type: number
-          description: Fair Market Rent for a two-bedroom unit in USD
-          example: 1700
-        Three-Bedroom:
-          type: number
-          description: Fair Market Rent for a three-bedroom unit in USD
-          example: 2200
-        Four-Bedroom:
-          type: number
-          description: Fair Market Rent for a four-bedroom unit in USD
-          example: 2600
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Unauthorized access. Please provide a valid bearer token.
     FMRArea:
       type: object
       description: FMR data for a geographic area
@@ -188,11 +159,40 @@ components:
           - '1'
         basicdata:
           $ref: '#/components/schemas/FMRUnit'
+    FMRUnit:
+      type: object
+      description: Fair Market Rent values by unit size
+      properties:
+        Efficiency:
+          type: number
+          description: Fair Market Rent for an efficiency (studio) unit in USD
+          example: 1200
+        One-Bedroom:
+          type: number
+          description: Fair Market Rent for a one-bedroom unit in USD
+          example: 1450
+        Two-Bedroom:
+          type: number
+          description: Fair Market Rent for a two-bedroom unit in USD
+          example: 1700
+        Three-Bedroom:
+          type: number
+          description: Fair Market Rent for a three-bedroom unit in USD
+          example: 2200
+        Four-Bedroom:
+          type: number
+          description: Fair Market Rent for a four-bedroom unit in USD
+          example: 2600
+    FMREntityResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FMRArea'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Bearer token obtained by registering at https://www.huduser.gov/hudapi/public/register
 externalDocs:
-  description: HUD User CHAS API Documentation
-  url: https://www.huduser.gov/portal/dataset/chas-api.html
+  description: HUD User Fair Market Rents API Documentation
+  url: https://www.huduser.gov/portal/dataset/fmr-api.html

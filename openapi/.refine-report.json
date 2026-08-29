@@ -1,11 +1,11 @@
 {
   "provider": "hud",
   "sources": [
-    "hud-chas-api-openapi.yml",
-    "hud-fair-market-rents-api-openapi.yml",
-    "hud-housing-counseling-api-openapi.yml",
-    "hud-income-limits-api-openapi.yml",
-    "hud-zip-code-crosswalk-api-openapi.yml"
+    "_original/hud-chas-openapi.yml",
+    "_original/hud-fair-market-rents-openapi.yml",
+    "_original/hud-housing-counselor-search-openapi.yml",
+    "_original/hud-income-limits-openapi.yml",
+    "_original/hud-usps-zip-code-crosswalk-openapi.yml"
   ],
   "outputs": [
     "hud-chas-api-openapi.yml",
@@ -17,6 +17,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "hud-chas-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "hud-fair-market-rents-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "hud-housing-counselor-search-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "hud-income-limits-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "hud-usps-zip-code-crosswalk-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "hud-chas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hud-fair-market-rents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hud-housing-counseling-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hud-income-limits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hud-zip-code-crosswalk-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: HUD User CHAS ZIP Code Crosswalk API
-  description: Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey (ACS) data on housing needs at national, state, county, place, and census tract levels. CHAS data is used for Consolidated Planning submissions required to receive HUD formula grant funds. Requires a free bearer token obtained from the HUD User portal.
+  title: HUD User USPS ZIP Code Crosswalk API
+  description: Maps USPS ZIP codes to and from census tracts, counties, CBSAs (Core Based Statistical Areas), congressional districts, and county subdivisions. Supports geographic lookups and crosswalk queries for housing analysis and policy research. Requires a free bearer token obtained from the HUD User portal.
   version: 1.0.0
   contact:
     name: HUD User Support
@@ -92,6 +92,16 @@ components:
           type: string
           description: Error message
           example: Unauthorized access. Please provide a valid bearer token.
+    CrosswalkResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/CrosswalkRecord'
     CrosswalkRecord:
       type: object
       description: A single crosswalk mapping record
@@ -136,21 +146,11 @@ components:
           type: number
           description: Ratio of total addresses in the ZIP that map to this geography
           example: 0.86
-    CrosswalkResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/CrosswalkRecord'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Bearer token obtained by registering at https://www.huduser.gov/hudapi/public/register
 externalDocs:
-  description: HUD User CHAS API Documentation
-  url: https://www.huduser.gov/portal/dataset/chas-api.html
+  description: HUD User USPS ZIP Code Crosswalk API Documentation
+  url: https://www.huduser.gov/portal/dataset/uspszip-api.html
