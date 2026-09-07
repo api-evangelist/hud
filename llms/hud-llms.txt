@@ -1,0 +1,70 @@
+# Department of Housing and Urban Development (HUD)
+
+> The U.S. Department of Housing and Urban Development is the federal agency responsible for the nation's housing programs and urban development. HUD publishes free, public APIs and open data: the HUD USER Datasets API (Fair Market Rents, Income Limits, MTSP Income Limits, CHAS, USPS ZIP Code Crosswalk), the eGIS ArcGIS REST geospatial services, the data.hud.gov DCAT-US open-data catalog, and the FHA Mortgage Limits lookup.
+
+Provenance: generated 2026-09-06 by the API Evangelist enrichment pipeline from this repository's apis.yml and artifacts, and from HUD's own public documentation fetched the same day. HUD does not publish an llms.txt of its own — /llms.txt returned 404 on www.hud.gov, www.huduser.gov, data.hud.gov, egis.hud.gov and entp.hud.gov on 2026-09-06.
+
+## Access at a glance
+
+- HUD USER Datasets API: base https://www.huduser.gov/hudapi/public — free, requires an access token (`Authorization: Bearer <token>`), and the account must be registered for each dataset separately or the call returns 403.
+- Read-only. Only GET is supported; any other method returns 405. Accept must be application/json or the call returns 406.
+- Rate limit: 60 queries per minute (stated in the API Terms of Service). No rate-limit headers and no documented status code on exhaustion.
+- No cost. No paid tiers. Attribution required: "This product uses the HUD User Data API but is not endorsed or certified by HUD User."
+- No OpenAPI, no GraphQL, no MCP server, no A2A agent card, no webhooks, no SDKs published by HUD.
+
+## APIs
+
+- [HUD USER FMR/IL API](https://www.huduser.gov/portal/dataset/fmr-api.html): Fair Market Rents, Small Area FMRs and Income Limits by state, county, North-East town and metropolitan area. Base https://www.huduser.gov/hudapi/public
+- [USPS ZIP Code Crosswalk API](https://www.huduser.gov/portal/dataset/uspszip-api.html): maps USPS ZIP codes to and from Census tracts, counties, CBSAs, CBSA divisions, congressional districts and county subdivisions (types 1-12), quarterly vintages. Base https://www.huduser.gov/hudapi/public/usps
+- [CHAS API](https://www.huduser.gov/portal/dataset/chas-api.html): Comprehensive Housing Affordability Strategy tabulations at nation, state, county, MCD and place summary levels. Base https://www.huduser.gov/hudapi/public/chas
+- [HUD eGIS ArcGIS REST Services](https://egis.hud.gov/ArcGIS/rest/services): anonymous ArcGIS Server 10.71 service directory covering CPD activities, grantees, Census/ACS thematic layers, HUD geographies. Self-describing with `?f=json`.
+- [HUD Open Data Catalog](https://data.hud.gov/): 220-dataset DCAT-US 1.1 catalog at https://data.hud.gov/data.json, anonymous.
+- [FHA Mortgage Limits](https://entp.hud.gov/idapp/html/hicostlook.cfm): FHA and GSE mortgage limits by state, county or MSA, with median sale price. HTML lookup form; no machine-readable contract.
+
+## Endpoints (HUD USER Datasets API)
+
+- GET /fmr/listStates — all states with HUD state codes
+- GET /fmr/listCounties/{stateid} — counties/towns in a state; add `?updated=2025` for the revised Income Limits 2025 FIPS codes
+- GET /fmr/listMetroAreas — metropolitan areas with HUD CBSA codes
+- GET /fmr/data/{entityid} — FMR for a county, town or metro area
+- GET /fmr/statedata/{statecode} — statewide FMR
+- GET /il/data/{entityid} — Income Limits for a county, town or metro area
+- GET /il/statedata/{statecode} — statewide Income Limits
+- GET /mtspil/data/{entityid} — Multifamily Tax Subsidy Project income limits
+- GET /usps?type={1-12}&query={geoid} — ZIP crosswalk; optional `year`, `quarter`
+- GET /chas?type={1-5}&stateId=&entityId=&year= — CHAS tabulations
+- GET /chas/listCounties/{stateId} | /chas/listMCDs/{stateId} | /chas/listCities/{stateId} — CHAS entity ids
+
+All endpoints take an optional `year` parameter selecting the data vintage; it defaults to the latest published year.
+
+## Errors
+
+Responses are `{"data": ...}` on success and `{"error": "<message>"}` on failure — not RFC 9457 problem+json.
+
+- 400 invalid query parameter value
+- 401 authentication failure (missing or bad token)
+- 403 the account is not registered for this dataset — cannot be fixed by retrying or by minting a new token; add the dataset in the HUD USER account
+- 404 no data found for the value supplied
+- 405 unsupported method (only GET)
+- 406 unsupported Accept header (must be application/json)
+- 500 internal server error
+
+## Getting started
+
+- [Register for an access token](https://www.huduser.gov/hudapi/public/register)
+- [HUD USER API Terms of Service](https://www.huduser.gov/portal/dataset/api-terms-of-service.html)
+- [HUD USER datasets landing page](https://www.huduser.gov/portal/pdrdatas_landing.html)
+- Support: helpdesk@huduser.gov (HUD USER), gis_helpdesk@hud.gov (eGIS), OpenData@hud.gov (open data)
+
+## Security
+
+- [HUD Vulnerability Disclosure Policy](https://www.hud.gov/vulnerability-disclosure-policy) — HUD Handbook 2400.45 REV 2.0, report to VDP@hud.gov, acknowledgement within 3 business days, safe harbour offered.
+- No /.well-known/security.txt is served on any HUD host.
+
+## Optional
+
+- [HUD-GIS Open Data portal](https://hudgis-hud.opendata.arcgis.com/)
+- [HUD Open Data Division](https://data.hud.gov/open_data)
+- [HUD data on Data.gov](https://catalog.data.gov/dataset?organization=hud-gov)
+- [HUD Exchange](https://www.hudexchange.info/)
+- [HUD newsroom](https://www.hud.gov/news)

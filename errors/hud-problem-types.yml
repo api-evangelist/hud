@@ -1,0 +1,106 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  The "Response Codes" table published identically on
+  https://www.huduser.gov/portal/dataset/fmr-api.html,
+  https://www.huduser.gov/portal/dataset/uspszip-api.html and
+  https://www.huduser.gov/portal/dataset/chas-api.html (fetched 2026-09-06),
+  plus a live anonymous 401 observed at
+  https://www.huduser.gov/hudapi/public/fmr/listStates.
+provider: Department of Housing and Urban Development
+providerId: department-of-housing-and-urban-development
+api: HUD USER Datasets API (FMR, IL, MTSP-IL, CHAS, USPS Crosswalk)
+docs: https://www.huduser.gov/portal/dataset/fmr-api.html
+format: json
+format_note: >-
+  NOT RFC 9457. The API does not serve application/problem+json. The observed
+  error envelope is a flat JSON object with a single `error` string — the
+  anonymous probe returned exactly {"error":"Unauthenticated"} with
+  Content-Type: application/json. HUD publishes the meaning of each status code
+  in prose but publishes no machine-readable error catalog, no error code
+  namespace, and no per-error remediation field.
+envelope:
+  content_type: application/json
+  shape: '{"error": "<message>"}'
+  fields:
+    - name: error
+      type: string
+      description: Human-readable failure message. No stable machine code accompanies it.
+  observed:
+    url: https://www.huduser.gov/hudapi/public/fmr/listStates
+    status: 401
+    body: '{"error":"Unauthenticated"}'
+    fetched: '2026-09-06'
+problem_types:
+  - status: 200
+    title: Request was successful
+    published_description: Request was successful
+    retryable: false
+  - status: 400
+    title: Invalid query parameter
+    published_description: >-
+      An invalid value was specified for one of the query parameters in the
+      request URI.
+    remediation: >-
+      Check the documented parameter domain — `type` must be 1-12 for the USPS
+      Crosswalk API and 1-5 for CHAS; `year` must be a published data year;
+      `quarter` must be 1-4.
+    retryable: false
+  - status: 401
+    title: Authentication failure
+    published_description: Authentication failure
+    remediation: >-
+      Send a current access token as `Authorization: Bearer <token>`. Create or
+      recreate one at https://www.huduser.gov/hudapi/public.
+    retryable: false
+    observed: true
+  - status: 403
+    title: Dataset not registered for this account
+    published_description: >-
+      Not allowed to access this dataset API because you have not registered
+      for it.
+    remediation: >-
+      Log in to the HUD USER Datasets API account and add the dataset to the
+      account's selected APIs. This CANNOT be resolved by retrying or by
+      minting a new token.
+    retryable: false
+    note: >-
+      This is the entitlement failure, distinct from 401. An agent must not
+      treat it as an auth-refresh condition.
+  - status: 404
+    title: No data found
+    published_description: "No data found using '(value you entered)'"
+    remediation: >-
+      The identifier is syntactically acceptable but has no data for the
+      requested year. Confirm the entity id from fmr/listStates,
+      fmr/listCounties/{stateid}, fmr/listMetroAreas, chas/listCounties/{stateId},
+      chas/listMCDs/{stateId} or chas/listCities/{stateId}.
+    retryable: false
+  - status: 405
+    title: Unsupported method
+    published_description: Unsupported method, only GET is supported
+    remediation: Use GET. The entire published surface is read-only.
+    retryable: false
+  - status: 406
+    title: Unsupported Accept header
+    published_description: Unsupported Accept Header value, must be application/json
+    remediation: 'Send Accept: application/json.'
+    retryable: false
+  - status: 500
+    title: Internal server error
+    published_description: Internal server error occurred
+    remediation: Retry with backoff; contact helpdesk@huduser.gov if it persists.
+    retryable: true
+rate_limit_error:
+  documented: false
+  note: >-
+    HUD's API Terms of Service states a 60-queries-per-minute ceiling and
+    reserves the right to block callers who exceed it, but publishes NO status
+    code, header or error body for the throttled case — 429 is not in the
+    response-code table. An agent cannot distinguish throttling from a 500
+    from the documentation alone. See
+    rate-limits/department-of-housing-and-urban-development-rate-limits.yml.
+gaps:
+  - No RFC 9457 problem+json representation.
+  - No machine-readable error code (only a free-text `error` string).
+  - No documented response for the published 60/min rate limit.

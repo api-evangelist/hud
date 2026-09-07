@@ -1,0 +1,88 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  https://www.huduser.gov/portal/dataset/fmr-api.html,
+  https://www.huduser.gov/portal/dataset/api-terms-of-service.html,
+  https://data.hud.gov/open_data, https://data.hud.gov/data.json
+  (fetched 2026-09-06), plus negative probes of https://status.hud.gov/
+  (DNS failure, curl exit 6) and https://www.hud.gov/status (HTTP 403).
+provider: Department of Housing and Urban Development
+providerId: department-of-housing-and-urban-development
+versioning:
+  policy_published: false
+  scheme: unversioned URI; data vintage selected by `year`/`quarter` parameters
+  detail: >-
+    HUD publishes no interface-versioning policy. The base URL carries no
+    version segment. The only version-shaped control is the data-vintage
+    `year`/`quarter` parameter set and the ad-hoc `updated=2025` flag added to
+    fmr/listCounties and fmr/listMetroAreas for the revised Income Limits 2025
+    FIPS codes.
+  see: conventions/department-of-housing-and-urban-development-conventions.yml
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  detail: >-
+    No deprecation policy, no Sunset or Deprecation response headers, no
+    published retirement notice period. The API Terms of Service reserves a
+    unilateral right to withdraw access — "HUD User reserves the right (though
+    not the obligation) to ... terminate or deny you access to and use of all or
+    part of the API at any time for any other reason in its sole discretion" —
+    with no notice commitment attached. That is the opposite of a deprecation
+    policy and no Deprecation pointer is emitted.
+  deprecated_operations: []
+status_page:
+  published: false
+  probes:
+    - url: https://status.hud.gov/
+      status: null
+      note: DNS resolution failed (curl exit 6) on 2026-09-06 — host does not exist.
+    - url: https://www.hud.gov/status
+      status: 403
+  detail: >-
+    HUD operates no public status page or uptime dashboard for any of its API
+    surfaces. No StatusPage pointer is emitted.
+sla:
+  published: false
+  detail: >-
+    Explicitly disclaimed. The API Terms of Service states the API is provided
+    "as is" and "as-available" and that "HUD User makes no warranty that the API
+    will be error free or that access thereto will be continuous or
+    uninterrupted."
+  source: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+change_communication:
+  changelog_published: false
+  detail: >-
+    No dated changelog or release-notes feed for any HUD API. Interface and data
+    changes are announced as prose notices inside the documentation pages — the
+    FMR API page currently carries an "Important Notice: FIPS Code Update for
+    Income Limits 2025" block, which is the only change notice found. The
+    department-wide press feed at https://www.hud.gov/rss.xml is program news,
+    not API release notes.
+  observed_notice:
+    title: 'Important Notice: FIPS Code Update for Income Limits 2025'
+    url: https://www.huduser.gov/portal/dataset/fmr-api.html
+    summary: >-
+      FIPS codes for counties in some states were updated for the Income Limits
+      2025 dataset and may differ from prior years; callers must pass
+      `updated=2025` to listCounties to retrieve them.
+data_release_cadence:
+  detail: >-
+    Data vintages, not software releases, are the unit of change. FMR and Income
+    Limits are published annually on a federal fiscal-year cycle; USPS ZIP Code
+    Crosswalk files are published quarterly (the API exposes `quarter` 1-4);
+    CHAS is published as multi-year ACS ranges (2006-2010 through 2014-2018 are
+    selectable via `year`).
+  source: https://www.huduser.gov/portal/dataset/uspszip-api.html
+terms_of_service: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+support:
+  email: helpdesk@huduser.gov
+  url: https://www.hud.gov/contactus
+gaps:
+  - No status page, no SLA, no uptime history.
+  - No deprecation policy and no Sunset/Deprecation header support.
+  - >-
+    No dated changelog — the 2025 FIPS-code change reached consumers only as
+    prose inside a documentation page, and silently changes results for callers
+    who do not read it.

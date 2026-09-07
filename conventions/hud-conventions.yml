@@ -1,0 +1,125 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  https://www.huduser.gov/portal/dataset/fmr-api.html,
+  https://www.huduser.gov/portal/dataset/uspszip-api.html,
+  https://www.huduser.gov/portal/dataset/chas-api.html,
+  https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+  (fetched 2026-09-06), plus live probes of
+  https://www.huduser.gov/hudapi/public/fmr/listStates and
+  https://egis.hud.gov/ArcGIS/rest/services?f=json
+provider: Department of Housing and Urban Development
+providerId: department-of-housing-and-urban-development
+scope: >-
+  Cross-cutting runtime semantics for the HUD USER Datasets API, the primary
+  documented HUD API. The eGIS ArcGIS REST services follow Esri's ArcGIS REST
+  conventions (f=json, where/outFields/resultOffset/resultRecordCount), which
+  are the vendor platform's, not HUD's.
+auth:
+  style: bearer token in the Authorization header
+  detail: 'Authorization: Bearer <access token>, per-dataset entitlement'
+  see: authentication/department-of-housing-and-urban-development-authentication.yml
+transport:
+  protocol: HTTPS only
+  methods:
+    - GET
+  methods_note: >-
+    The published response-code table returns 405 "Unsupported method, only GET
+    is supported". The entire documented HUD USER API surface is read-only.
+  media_type: application/json
+  accept_required: true
+  accept_note: 406 is returned for any Accept value other than application/json.
+versioning:
+  style: none-in-path
+  detail: >-
+    There is no version segment in the URI and no version header. The base URL
+    is https://www.huduser.gov/hudapi/public with no /v1. Data vintage — not
+    interface version — is selected with the optional `year` parameter (and
+    `quarter` for the USPS Crosswalk API), defaulting to the latest available.
+  data_vintage_params:
+    - name: year
+      applies_to: [fmr, il, mtspil, usps, chas]
+      default: latest year
+    - name: quarter
+      applies_to: [usps]
+      default: latest quarter
+    - name: updated
+      applies_to: [fmr/listCounties, fmr/listMetroAreas]
+      note: >-
+        `updated=2025` returns the revised FIPS codes for the Income Limits 2025
+        dataset. HUD introduced this as a query parameter rather than a version
+        bump, so the same URL without it silently returns the older codes — a
+        breaking data change delivered as an opt-in flag.
+  breaking_change_signal: none
+pagination:
+  style: none
+  detail: >-
+    No pagination is documented on any HUD USER endpoint. List endpoints
+    (fmr/listStates, fmr/listMetroAreas, fmr/listCounties/{stateid}) return the
+    complete collection in one response, and the USPS Crosswalk API returns an
+    entire national file when `query=All`. There are no page, offset, limit or
+    cursor parameters, and no next-link in the envelope.
+  params: []
+  response_fields: []
+filtering_and_expansion:
+  sparse_fields: false
+  expansion: false
+  detail: >-
+    No field selection, no expansion, no sparse fieldsets. Response shape is
+    fixed per endpoint.
+response_envelope:
+  success: '{"data": ...}'
+  detail: >-
+    Successful responses wrap the payload in a top-level `data` key. The USPS
+    Crosswalk API nests further as data.results (the published Python example
+    reads response.json()["data"]["results"]).
+  error: '{"error": "<message>"}'
+  see: errors/department-of-housing-and-urban-development-problem-types.yml
+request_id_tracing:
+  supported: false
+  detail: >-
+    No correlation, request-id or trace header is documented or observed. A
+    consumer reporting a failure to helpdesk@huduser.gov has no id to quote.
+rate_limit_signaling:
+  documented_limit: 60 requests per minute
+  limit_source: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+  headers: []
+  headers_note: >-
+    NO rate-limit response headers are documented or observed — no
+    X-RateLimit-*, no RateLimit-*, no Retry-After. The limit exists in the terms
+    of service only. An agent has no runtime signal of remaining budget and no
+    documented status code for exhaustion.
+  see: rate-limits/department-of-housing-and-urban-development-rate-limits.yml
+idempotency:
+  coverage: na
+  scope: []
+  mechanism: none
+  detail: >-
+    Not applicable. The documented HUD USER API accepts GET only (405 for
+    anything else) and the eGIS ArcGIS services and data.hud.gov catalog are
+    read-only public reads. There is no mutating surface, so there is nothing
+    for an idempotency key to protect. `na` here means "no write surface", not
+    "writes exist but are unprotected".
+  write_surface: false
+dry_run_mode:
+  supported: na
+  detail: >-
+    Not applicable — read-only API. Every documented call is already free of
+    side effects, which is the property dry-run exists to provide.
+reversibility:
+  applicable: false
+  grade: na
+  write_surfaces: []
+  detail: >-
+    Not applicable. There is no write, create, update or delete operation on any
+    documented HUD API surface, so there is no action for an agent to take back.
+    Recorded as `na` — an honest not-applicable — rather than a zero.
+metadata:
+  custom_metadata: false
+  detail: No user-supplied metadata or tagging on any request.
+cross_references:
+  authentication: authentication/department-of-housing-and-urban-development-authentication.yml
+  errors: errors/department-of-housing-and-urban-development-problem-types.yml
+  lifecycle: lifecycle/department-of-housing-and-urban-development-lifecycle.yml
+  rate_limits: rate-limits/department-of-housing-and-urban-development-rate-limits.yml
+  conformance: conformance/department-of-housing-and-urban-development-conformance.yml

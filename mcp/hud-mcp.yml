@@ -1,0 +1,108 @@
+generated: '2026-09-06'
+method: derived
+status: candidate
+source: >-
+  No MCP server exists. This candidate tool list is derived from the endpoint
+  tables HUD publishes at https://www.huduser.gov/portal/dataset/fmr-api.html,
+  https://www.huduser.gov/portal/dataset/uspszip-api.html and
+  https://www.huduser.gov/portal/dataset/chas-api.html (fetched 2026-09-06).
+provider: Department of Housing and Urban Development
+providerId: department-of-housing-and-urban-development
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+search_evidence: >-
+  Searched for a HUD-hosted or HUD-published MCP server and found none. No
+  /.well-known/ai-plugin.json, agent-card.json or agent.json on any HUD host
+  (all 404 — see the well-known probe); no MCP package under the official HUD
+  GitHub organization https://github.com/hudgov; nothing on npm or PyPI from
+  HUD. `auth: api-key` above describes the credential a server WOULD need (the
+  HUD USER bearer token), not a credential to any server that exists.
+summary: >-
+  A candidate, not a server. HUD ships no MCP surface. The tools below map
+  one-to-one onto documented, live HUD USER REST endpoints and are recorded so
+  the gap is measurable and so anyone building a HUD MCP server has an accurate
+  starting point. Every tool is read-only, matching the API's GET-only surface.
+tools:
+  - name: hud_list_states
+    description: List all US states and territories with HUD state codes and FIPS numbers.
+    rest: GET https://www.huduser.gov/hudapi/public/fmr/listStates
+    parameters: []
+  - name: hud_list_counties
+    description: List all counties (and North-East towns) in a state, with HUD entity FIPS codes.
+    rest: GET https://www.huduser.gov/hudapi/public/fmr/listCounties/{stateid}
+    parameters:
+      - {name: stateid, in: path, required: true, description: 2-letter state code}
+      - {name: updated, in: query, required: false, description: 'Pass 2025 for the revised Income Limits 2025 FIPS codes'}
+  - name: hud_list_metro_areas
+    description: List all metropolitan areas with HUD CBSA codes.
+    rest: GET https://www.huduser.gov/hudapi/public/fmr/listMetroAreas
+    parameters:
+      - {name: updated, in: query, required: false, description: 'Pass 2025 for the Income Limits 2025 vintage'}
+  - name: hud_get_fair_market_rent
+    description: Get Fair Market Rent data for a county, North-East town or metropolitan area.
+    rest: GET https://www.huduser.gov/hudapi/public/fmr/data/{entityid}
+    parameters:
+      - {name: entityid, in: path, required: true, description: County FIPS code or metro CBSA code}
+      - {name: year, in: query, required: false, description: Data year; defaults to latest}
+  - name: hud_get_state_fair_market_rent
+    description: Get statewide Fair Market Rent data.
+    rest: GET https://www.huduser.gov/hudapi/public/fmr/statedata/{statecode}
+    parameters:
+      - {name: statecode, in: path, required: true}
+      - {name: year, in: query, required: false}
+  - name: hud_get_income_limits
+    description: Get HUD Income Limits for a county, North-East town or metropolitan area.
+    rest: GET https://www.huduser.gov/hudapi/public/il/data/{entityid}
+    parameters:
+      - {name: entityid, in: path, required: true}
+      - {name: year, in: query, required: false}
+  - name: hud_get_state_income_limits
+    description: Get statewide HUD Income Limits.
+    rest: GET https://www.huduser.gov/hudapi/public/il/statedata/{statecode}
+    parameters:
+      - {name: statecode, in: path, required: true}
+      - {name: year, in: query, required: false}
+  - name: hud_get_mtsp_income_limits
+    description: Get Multifamily Tax Subsidy Project income limits for a geography.
+    rest: GET https://www.huduser.gov/hudapi/public/mtspil/data/{entityid}
+    parameters:
+      - {name: entityid, in: path, required: true}
+      - {name: year, in: query, required: false}
+  - name: hud_usps_crosswalk
+    description: >-
+      Map USPS ZIP codes to and from Census tracts, counties, CBSAs, CBSA
+      divisions, congressional districts and county subdivisions.
+    rest: GET https://www.huduser.gov/hudapi/public/usps
+    parameters:
+      - {name: type, in: query, required: true, description: 'Crosswalk type 1-12'}
+      - {name: query, in: query, required: true, description: 'ZIP, GEOID, 2-letter state code, or "All"'}
+      - {name: year, in: query, required: false}
+      - {name: quarter, in: query, required: false, description: '1-4; defaults to latest'}
+  - name: hud_get_chas
+    description: Get Comprehensive Housing Affordability Strategy tabulations for a geography.
+    rest: GET https://www.huduser.gov/hudapi/public/chas
+    parameters:
+      - {name: type, in: query, required: true, description: 'Summary level 1=Nation 2=State 3=County 4=MCD 5=Place'}
+      - {name: stateId, in: query, required: false, description: Required for types 2-5}
+      - {name: entityId, in: query, required: false, description: Required for types 3-5}
+      - {name: year, in: query, required: false, description: 'ACS range, e.g. 2014-2018'}
+  - name: hud_list_chas_entities
+    description: List the counties, MCDs or cities in a state that can qualify a CHAS request.
+    rest: >-
+      GET https://www.huduser.gov/hudapi/public/chas/listCounties/{stateId} |
+      /chas/listMCDs/{stateId} | /chas/listCities/{stateId}
+    parameters:
+      - {name: stateId, in: path, required: true, description: 'Numeric state FIPS, 1-56'}
+constraints:
+  auth: >-
+    Every tool requires Authorization: Bearer <HUD USER access token>, and the
+    account must additionally be registered for the specific dataset or the call
+    returns 403.
+  rate_limit: 60 requests per minute (HUD USER API Terms of Service).
+  read_only: true
+  read_only_note: The API returns 405 for any method other than GET.

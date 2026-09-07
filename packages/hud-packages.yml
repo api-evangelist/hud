@@ -1,0 +1,57 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  Registry lookups against pypi.org/pypi/<pkg>/json, registry.npmjs.org,
+  crandb.r-pkg.org and cran.r-project.org, plus the HUD USER Datasets API
+  documentation at https://www.huduser.gov/portal/dataset/fmr-api.html
+provider: Department of Housing and Urban Development
+providerId: department-of-housing-and-urban-development
+summary: >-
+  HUD publishes NO first-party client libraries for any of its APIs. The HUD
+  USER Datasets API documentation shows raw curl, Python `requests` and R
+  `httr` examples only — there is no HUD-maintained SDK on npm, PyPI, Maven
+  Central, NuGet, pkg.go.dev, RubyGems, Packagist or crates.io, and the
+  official HUD GitHub organization (https://github.com/hudgov) publishes no
+  client library. The packages below are COMMUNITY-maintained wrappers,
+  recorded here for accuracy and explicitly marked official: false.
+official_package_count: 0
+community_package_count: 2
+packages:
+  - name: hudpy
+    registry: pypi
+    url: https://pypi.org/project/hudpy/
+    language: python
+    official: false
+    maintainer: etam4260 (independent, not HUD)
+    repository: https://github.com/etam4260/hudpy
+    version: 0.2.0
+    published: '2022-06-13'
+    description: >-
+      A Python interface to the US Department of Housing and Urban Development
+      APIs (FMR, IL, CHAS, USPS Crosswalk).
+    note: >-
+      Third-party. Last release 2022-06-13, more than four years before this
+      probe — it predates the 2025 Income Limits FIPS-code change that HUD
+      documents on the FMR API page, so consumers cannot assume it tracks the
+      current API.
+  - name: rhud
+    registry: github
+    url: https://github.com/etam4260/rhud
+    language: r
+    official: false
+    maintainer: etam4260 (independent, not HUD)
+    repository: https://github.com/etam4260/rhud
+    version: null
+    published: null
+    description: An R interface for the HUD USER Datasets APIs.
+    note: >-
+      Third-party and NOT distributed through CRAN — https://cran.r-project.org/package=rhud
+      returned 404 on 2026-09-06 and crandb.r-pkg.org/rhud carried no Version or
+      Date/Publication field, so no registry metadata endpoint exists to read a
+      version or release date from. Recorded as null (checked, nothing to record),
+      not omitted.
+gaps:
+  - >-
+    No first-party SDK in any language. A HUD-maintained Python client would be
+    the highest-value addition given the documented Python example on every HUD
+    USER API page.

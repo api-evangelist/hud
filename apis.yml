@@ -180,6 +180,56 @@ apis:
   - type: OpenAPI
     url: openapi/hud-zip-code-crosswalk-api-openapi.yml
 common:
+  - type: Open Data
+    url: https://data.hud.gov/
+  - type: HUD USER
+    url: https://www.huduser.gov/portal/home.html
+  - type: HUD GIS
+    url: https://hudgis-hud.opendata.arcgis.com/
+  - type: FHA
+    url: https://www.hud.gov/fha
+  - type: HUD Exchange
+    url: https://www.hudexchange.info/
+  - type: News
+    url: https://www.hud.gov/press
+  - type: Support
+    url: https://www.hud.gov/contactus
+  - type: PrivacyPolicy
+    url: https://www.hud.gov/aboutus/privacy-policy
+  - type: Data.gov HUD Catalog
+    url: https://catalog.data.gov/dataset?organization=hud-gov
+  - type: GitHubOrganization
+    url: https://github.com/hudgov
+  - type: DeveloperPortal
+    url: https://www.huduser.gov/hudapi/public
+  - type: APIReference
+    url: https://www.huduser.gov/portal/dataset/uspszip-api.html
+  - type: GettingStarted
+    url: https://www.huduser.gov/portal/dataset/fmr-api.html
+  - type: SignUp
+    url: https://www.huduser.gov/hudapi/public/register
+  - type: TermsOfService
+    url: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+  - type: Security
+    url: https://www.hud.gov/vulnerability-disclosure-policy
+  - type: Conventions
+    url: conventions/hud-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hud-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/hud-lifecycle.yml
+  - type: Conformance
+    url: conformance/hud-conformance.yml
+  - type: DataModel
+    url: data-model/hud-data-model.yml
+  - type: Packages
+    url: packages/hud-packages.yml
+  - type: VulnerabilityDisclosure
+    url: security/hud-vulnerability-disclosure.yml
+  - type: X-MCPServerCandidate
+    url: mcp/hud-mcp.yml
+  - type: LLMsTxt
+    url: llms/hud-llms.txt
   - type: AgenticAccess
     url: agentic-access/hud-agentic-access.yml
   - type: DomainSecurity

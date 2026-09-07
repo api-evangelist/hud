@@ -1,0 +1,162 @@
+generated: '2026-09-06'
+method: derived
+source: >-
+  Derived from the "Response Structure" and endpoint tables published at
+  https://www.huduser.gov/portal/dataset/fmr-api.html,
+  https://www.huduser.gov/portal/dataset/uspszip-api.html and
+  https://www.huduser.gov/portal/dataset/chas-api.html (fetched 2026-09-06).
+  There is no OpenAPI or JSON Schema to derive from — every field below was
+  read from HUD's own published response-structure tables, and no field was
+  inferred.
+provider: Department of Housing and Urban Development
+providerId: department-of-housing-and-urban-development
+api: HUD USER Datasets API
+summary: >-
+  The HUD USER data model is a geography spine (State -> County/Town and
+  State -> MetroArea) with four measurement sets hanging off it: Fair Market
+  Rents, Income Limits, Multifamily Tax Subsidy Project Income Limits, and CHAS
+  housing-affordability tabulations. The USPS ZIP Code Crosswalk is a separate
+  many-to-many mapping between USPS ZIP codes and Census/CBSA/congressional
+  geographies. Every entity is keyed by a government geographic identifier —
+  there are no HUD-minted surrogate ids and no id prefixes.
+identifier_schemes:
+  - name: state_code
+    form: 2-letter USPS state abbreviation
+    example: VA
+  - name: state_num
+    form: numeric FIPS state code as a string
+    example: '51'
+  - name: fips_code
+    form: 10-digit HUD entity id (5-digit county FIPS + 5-digit town/sub code, 99999 when none)
+    example: '5100199999'
+    note: >-
+      HUD revised county FIPS codes for the Income Limits 2025 dataset; callers
+      must pass updated=2025 to fmr/listCounties to receive the revised set.
+  - name: cbsa_code
+    form: 'HUD metro id: METRO<cbsa><M|N><subarea>'
+    example: METRO10180M10180
+  - name: zip
+    form: 5-digit USPS ZIP code
+    example: '22031'
+  - name: tract GEOID
+    form: 11-digit state FIPS + county FIPS + tract code
+    example: '51059461700'
+  - name: county GEOID
+    form: 5-digit state FIPS + county FIPS
+    example: '51600'
+  - name: congressional district GEOID
+    form: 4-digit state FIPS + district code
+    example: '7200'
+  - name: county subdivision GEOID
+    form: 10-digit county subdivision code
+    example: '4606720300'
+entities:
+  - name: State
+    source_operation: GET /fmr/listStates
+    fields:
+      - {name: state_name, type: string, description: State name}
+      - {name: state_code, type: string, description: State code}
+      - {name: state_num, type: string, description: State number}
+      - {name: category, type: string, description: Constant value "State"}
+    relationships:
+      - {type: has_many, target: County, via: state_code}
+      - {type: has_many, target: FairMarketRent, via: state_code}
+      - {type: has_many, target: IncomeLimit, via: state_code}
+      - {type: has_many, target: ChasTabulation, via: stateId}
+  - name: County
+    source_operation: GET /fmr/listCounties/{stateid}
+    fields:
+      - {name: state_code, type: string, description: State code}
+      - {name: fips_code, type: string, description: FIPS code of the county}
+      - {name: county_name, type: string, description: County name}
+      - {name: town_name, type: string, description: Town name — applicable for North East regions}
+      - {name: category, type: string, description: Constant value "County"}
+    relationships:
+      - {type: belongs_to, target: State, via: state_code}
+      - {type: has_one, target: FairMarketRent, via: fips_code}
+      - {type: has_one, target: IncomeLimit, via: fips_code}
+  - name: MetroArea
+    source_operation: GET /fmr/listMetroAreas
+    fields:
+      - {name: cbsa_code, type: string, description: CBSA code of the metropolitan area}
+      - {name: area_name, type: string, description: Area name}
+      - {name: category, type: string, description: Constant value "MetroArea"}
+    relationships:
+      - {type: has_one, target: FairMarketRent, via: cbsa_code}
+      - {type: has_one, target: IncomeLimit, via: cbsa_code}
+  - name: FairMarketRent
+    source_operation: GET /fmr/data/{entityid}, GET /fmr/statedata/{statecode}
+    key: entityid (county fips_code, town, or metro cbsa_code)
+    qualifier: year
+    description: >-
+      Fair Market Rent and Small Area FMR values for a county, North-East town
+      or metropolitan area, for a fiscal year.
+    relationships:
+      - {type: belongs_to, target: County, via: entityid}
+      - {type: belongs_to, target: MetroArea, via: entityid}
+  - name: IncomeLimit
+    source_operation: GET /il/data/{entityid}, GET /il/statedata/{statecode}
+    key: entityid
+    qualifier: year
+    description: >-
+      HUD Income Limits (30%, 50%, 80% of Area Median Income) for a geography
+      and year, anchored on Median Family Income.
+    relationships:
+      - {type: belongs_to, target: County, via: entityid}
+      - {type: belongs_to, target: MetroArea, via: entityid}
+  - name: MtspIncomeLimit
+    source_operation: GET /mtspil/data/{entityid}
+    key: entityid
+    qualifier: year
+    description: >-
+      Multifamily Tax Subsidy Project income limits — the LIHTC/bond variant of
+      the Income Limits series, published on the same geography spine.
+    relationships:
+      - {type: belongs_to, target: County, via: entityid}
+      - {type: belongs_to, target: MetroArea, via: entityid}
+  - name: CrosswalkResult
+    source_operation: GET /usps?type={1-12}&query={geoid}
+    fields:
+      - {name: year, type: string, description: Data year}
+      - {name: quarter, type: string, description: Quarter of the data year}
+      - {name: query, type: string, description: ZIP, tract, county, CBSA or CD supplied as input}
+      - {name: crosswalk_type, type: string, description: Type of crosswalk requested}
+      - {name: results, type: array, description: The mapped geographies with their allocation ratios}
+    description: >-
+      A many-to-many mapping between USPS ZIP codes and Census tracts, counties,
+      CBSAs, CBSA divisions, congressional districts and county subdivisions, in
+      both directions (types 1-12).
+    relationships:
+      - {type: has_many, target: County, via: query}
+      - {type: has_many, target: MetroArea, via: query}
+  - name: ChasTabulation
+    source_operation: GET /chas?type={1-5}&stateId=&entityId=&year=
+    key: type + stateId + entityId
+    qualifier: 'year (ACS ranges 2006-2010 through 2014-2018)'
+    summary_levels: {1: Nation, 2: State, 3: County, 4: MCD, 5: Place}
+    description: >-
+      Comprehensive Housing Affordability Strategy tabulations. Fields are a
+      lettered/numbered measure grid published as a data dictionary rather than
+      as named properties — A1-A18 household income by tenure, B1-B9 housing
+      problems, C1-C6 severe housing problems, D1-D8 cost burden, each split
+      owner-occupied / renter-occupied / total.
+    relationships:
+      - {type: belongs_to, target: State, via: stateId}
+      - {type: belongs_to, target: ChasEntity, via: entityId}
+  - name: ChasEntity
+    source_operation: >-
+      GET /chas/listCounties/{stateId}, GET /chas/listMCDs/{stateId},
+      GET /chas/listCities/{stateId}
+    description: The county, minor civil division or place ids that qualify a CHAS request.
+    relationships:
+      - {type: belongs_to, target: State, via: stateId}
+notes:
+  - >-
+    The entity graph is a star, not a web: every measurement entity points back
+    at a geography and nothing points at another measurement. There are no
+    embedded sub-resources and no $ref reuse to derive, because there is no
+    spec.
+  - >-
+    CHAS is the weakest-typed surface. Its response properties are opaque codes
+    whose meanings live in a separate HTML data dictionary, so an agent cannot
+    interpret a CHAS response from the API alone.

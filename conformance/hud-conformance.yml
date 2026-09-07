@@ -1,0 +1,142 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  https://data.hud.gov/data.json (HTTP 200, 220 datasets, fetched 2026-09-06),
+  https://hudgis-hud.opendata.arcgis.com/api/feed/dcat-us/1.1.json (HTTP 200),
+  https://data.hud.gov/open_data, https://egis.hud.gov/ArcGIS/rest/services?f=json,
+  and the HUD USER Datasets API documentation and terms of service.
+provider: Department of Housing and Urban Development
+providerId: department-of-housing-and-urban-development
+summary: >-
+  HUD's strongest machine-readable conformance is in its open-data layer, not
+  its API layer: data.hud.gov serves a Project Open Data / DCAT-US 1.1 catalog
+  that DECLARES its own conformsTo, which is the domain standard for US federal
+  data publishing. The HUD USER Datasets API itself conforms to no
+  cross-cutting API standard — it is a bespoke JSON-over-HTTP read API with no
+  OpenAPI, no OAuth, no RFC 9457 and no pagination standard.
+conformance:
+  - id: dcat-us-1.1
+    name: DCAT-US Schema v1.1 (Project Open Data)
+    domain_standard: true
+    conforms: true
+    evidence: >-
+      https://data.hud.gov/data.json declares
+      "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+      "describedBy": "https://project-open-data.cio.gov/v1.1/schema/catalog.json",
+      "@context": "https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld"
+      and "@type": "dcat:Catalog" over 220 dcat:Dataset entries, with
+      publisher.name "U.S. Department of Housing and Urban Development".
+      Fetched 2026-09-06, HTTP 200.
+    note: >-
+      The contract declares the standard about itself — this is not a marketing
+      claim on a page. A consumer that already speaks DCAT-US ingests HUD's
+      entire enterprise data listing with no bespoke connector.
+  - id: dcat-us-1.1-geospatial
+    name: DCAT-US 1.1 (geospatial catalog feed)
+    domain_standard: true
+    conforms: true
+    evidence: >-
+      https://hudgis-hud.opendata.arcgis.com/api/feed/dcat-us/1.1.json returned
+      HTTP 200 application/json (674 KB) on 2026-09-06 — the HUD-GIS open data
+      site publishes its geospatial holdings in the same federal catalog schema.
+    note: >-
+      Served by the Esri ArcGIS Hub platform on HUD's own opendata.arcgis.com
+      subdomain, on HUD's behalf.
+  - id: open-government-data-act
+    name: OPEN Government Data Act (Evidence Act Title II, P.L. 115-435)
+    conforms: true
+    evidence: >-
+      https://data.hud.gov/open_data states the Open Data Division maintains
+      HUD's catalog "in compliance with the Open, Public, Electronic and
+      Necessary (OPEN) Government Data Act of 2018", names the statutory
+      duties (machine-readable publication, comprehensive data inventory,
+      designated Chief Data Officer) and links the HUD Open Data Plan
+      (https://data.hud.gov/HUD_Open_Data_Plan_March2026.pdf). Fetched
+      2026-09-06, HTTP 200.
+  - id: cisa-bod-20-01
+    name: CISA Binding Operational Directive 20-01 (vulnerability disclosure)
+    conforms: partial
+    evidence: >-
+      https://www.hud.gov/vulnerability-disclosure-policy (HTTP 200) publishes
+      HUD Handbook 2400.45 REV 2.0 with safe harbour, a VDP@hud.gov reporting
+      channel and a 3-business-day acknowledgement commitment.
+    gap: >-
+      The directive's machine-readable companion is absent — /.well-known/security.txt
+      is 404 on every HUD host and /security.txt on www.hud.gov is an empty
+      0-byte file.
+  - id: arcgis-rest
+    name: Esri ArcGIS REST Services (self-describing service directory)
+    conforms: true
+    evidence: >-
+      https://egis.hud.gov/ArcGIS/rest/services?f=json returned HTTP 200
+      application/json declaring currentVersion 10.71 and 10 service folders
+      (affh, affht, cart, cpdmaps, gotit, hrl, opendata, pmt, tdat, Utilities);
+      https://egis.hud.gov/ArcGIS/rest/services/cpdmaps/HudCpdActivities/MapServer?f=json
+      returned the full layer/field metadata for that service. Fetched 2026-09-06.
+    note: >-
+      A vendor platform convention, not an open standard. It IS a real
+      self-describing machine-readable contract, which is why it is recorded,
+      but it is Esri's shape and confers no OGC conformance.
+  - id: ogc-api-features
+    name: OGC API - Features
+    conforms: false
+    evidence: >-
+      Probed where evidence pointed (the eGIS ArcGIS surface named in apis.yml).
+      https://egis.hud.gov/arcgis/services/opendata/AcsThematicCounty/MapServer/WMSServer?service=WMS&request=GetCapabilities
+      and the matching WFSServer URL both returned HTTP 400 with an ArcGIS
+      Server Error HTML body on 2026-09-06; the server reports currentVersion
+      10.71, which predates ArcGIS Enterprise OGCFeatureServer support. No
+      /conformance document and no *_Capabilities XML exists on this estate.
+    note: >-
+      Recorded as a measured absence, not an assumption. No OGC contract was
+      generated or derived.
+  - id: rfc9457
+    name: 'RFC 9457: Problem Details for HTTP APIs'
+    conforms: false
+    evidence: >-
+      The live 401 from https://www.huduser.gov/hudapi/public/fmr/listStates
+      returned Content-Type application/json with body {"error":"Unauthenticated"} —
+      not application/problem+json. Fetched 2026-09-06.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence: >-
+      The documented scheme is a static bearer access token minted from a HUD
+      USER account page; /.well-known/oauth-authorization-server returned 404 on
+      www.huduser.gov and every other HUD host.
+  - id: openapi
+    name: OpenAPI Specification
+    conforms: false
+    evidence: >-
+      /openapi.json, /openapi.yaml, /swagger.json, /api-docs, /docs and /redoc
+      were probed on www.huduser.gov, www.hud.gov, data.hud.gov, egis.hud.gov,
+      entp.hud.gov and hudgis-hud.opendata.arcgis.com, and additionally under
+      https://www.huduser.gov/hudapi/public/. Every path returned 404 except the
+      ArcGIS Hub SPA shell, which answers 200 text/html for any path. Fetched
+      2026-09-06.
+  - id: json-api
+    name: 'JSON:API'
+    conforms: false
+    evidence: >-
+      Responses use a bespoke {"data": ...} wrapper with no type/id resource
+      objects, no links and no included member.
+  - id: pagination
+    name: Standard pagination
+    conforms: false
+    evidence: >-
+      No page/offset/limit/cursor parameter appears in any published HUD USER
+      endpoint table; list endpoints return complete collections and the USPS
+      Crosswalk API returns whole national files for query=All.
+  - id: idempotency
+    name: Idempotency keys
+    conforms: na
+    evidence: >-
+      No write surface — the published response-code table returns 405
+      "Unsupported method, only GET is supported".
+certifications_published: false
+certifications_note: >-
+  HUD is a US federal agency operating under FISMA and NIST SP 800-53 rather
+  than a commercial certification regime, and publishes no SOC 2, ISO 27001,
+  PCI or FedRAMP attestation for these public data APIs. No Compliance pointer
+  is emitted, because emitting one would assert a published certification
+  program that does not exist.
