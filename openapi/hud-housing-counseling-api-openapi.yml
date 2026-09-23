@@ -129,13 +129,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Bad request - invalid parameters provided
     HousingCounselingAgency:
       type: object
       description: HUD-approved housing counseling agency
@@ -281,6 +274,13 @@ components:
           - 'null'
           description: 'Comma-separated service codes offered by the agency. Common codes: DFC (Default/Foreclosure Counseling), FBC (Fair Housing/Buying Counseling), HIC (Home Improvement Counseling), HMC (Home Maintenance Counseling), NDW (Non-Delinquency Post-Purchase Counseling Workshop), PPC (Pre-Purchase Counseling), PPW (Pre-Purchase Homebuyer Education Workshop), RHC (Rental Housing Counseling), PLW (Predatory Lending Workshop), FHW (Fair Housing Pre-Purchase Education Workshop), FBW (Financial Management/Budget Counseling Workshop).'
           example: DFC,FBC,HIC,HMC,PPC,PPW,RHC
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Bad request - invalid parameters provided
 externalDocs:
   description: HUD Housing Counseling Search Documentation
   url: https://data.hud.gov/housing_counseling.html

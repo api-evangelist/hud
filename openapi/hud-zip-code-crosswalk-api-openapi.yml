@@ -85,13 +85,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Unauthorized access. Please provide a valid bearer token.
     CrosswalkResponse:
       type: object
       properties:
@@ -146,6 +139,13 @@ components:
           type: number
           description: Ratio of total addresses in the ZIP that map to this geography
           example: 0.86
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
   securitySchemes:
     bearerAuth:
       type: http

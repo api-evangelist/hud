@@ -23,7 +23,8 @@
     "hud-fair-market-rents-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "hud-housing-counselor-search-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "hud-income-limits-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "hud-usps-zip-code-crosswalk-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0"
+    "hud-usps-zip-code-crosswalk-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "hud-chas-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -91,13 +91,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CHASRecord'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Unauthorized access. Please provide a valid bearer token.
     CHASRecord:
       type: object
       description: CHAS housing needs data record
@@ -147,6 +140,13 @@ components:
         T4_moe:
           type: number
           description: LI households with housing problems margin of error
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
   securitySchemes:
     bearerAuth:
       type: http
