@@ -103,6 +103,11 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    FMREntityResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FMRArea'
     FMRArea:
       type: object
       description: FMR data for a geographic area
@@ -138,32 +143,6 @@ components:
           - '1'
         basicdata:
           $ref: '#/components/schemas/FMRUnit'
-    FMREntityResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/FMRArea'
-    FMRStateResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            metroareas:
-              type: array
-              items:
-                $ref: '#/components/schemas/FMRArea'
-            counties:
-              type: array
-              items:
-                $ref: '#/components/schemas/FMRArea'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Unauthorized access. Please provide a valid bearer token.
     FMRUnit:
       type: object
       description: Fair Market Rent values by unit size
@@ -188,6 +167,27 @@ components:
           type: number
           description: Fair Market Rent for a four-bedroom unit in USD
           example: 2600
+    FMRStateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            metroareas:
+              type: array
+              items:
+                $ref: '#/components/schemas/FMRArea'
+            counties:
+              type: array
+              items:
+                $ref: '#/components/schemas/FMRArea'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
   securitySchemes:
     bearerAuth:
       type: http
