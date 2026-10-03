@@ -85,23 +85,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CrosswalkResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/CrosswalkRecord'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Unauthorized access. Please provide a valid bearer token.
     CrosswalkRecord:
       type: object
       description: A single crosswalk mapping record
@@ -146,6 +129,23 @@ components:
           type: number
           description: Ratio of total addresses in the ZIP that map to this geography
           example: 0.86
+    CrosswalkResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/CrosswalkRecord'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
   securitySchemes:
     bearerAuth:
       type: http

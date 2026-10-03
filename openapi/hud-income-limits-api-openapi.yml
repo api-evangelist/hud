@@ -103,42 +103,27 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    IncomeLimitArea:
+    ErrorResponse:
       type: object
-      description: Income limit data for a geographic area
       properties:
-        area_name:
+        message:
           type: string
-          description: Name of the geographic area
-          example: Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area
-        area_code:
-          type: string
-          description: HUD area code
-          example: METRO47900M47900
-        county_name:
-          type: string
-          description: County name if applicable
-        state_name:
-          type: string
-          description: State name
-          example: District of Columbia
-        year:
-          type: string
-          description: Fiscal year for the income limit data
-          example: '2024'
-        median_income:
-          type: integer
-          description: Area Median Income (AMI) in USD
-          example: 143300
-        VeryLow:
-          description: Income limits at 50% of AMI (Very Low Income)
-          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
-        ExtVeryLow:
-          description: Income limits at 30% of AMI (Extremely Low Income)
-          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
-        Low:
-          description: Income limits at 80% of AMI (Low Income)
-          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
+    IncomeLimitStateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            metroareas:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
+            counties:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
     IncomeLimitByHouseholdSize:
       type: object
       description: Income limit values by household size (1-8 persons)
@@ -175,32 +160,47 @@ components:
           type: integer
           description: Income limit for 8-person household in USD
           example: 67800
+    IncomeLimitArea:
+      type: object
+      description: Income limit data for a geographic area
+      properties:
+        area_name:
+          type: string
+          description: Name of the geographic area
+          example: Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area
+        area_code:
+          type: string
+          description: HUD area code
+          example: METRO47900M47900
+        county_name:
+          type: string
+          description: County name if applicable
+        state_name:
+          type: string
+          description: State name
+          example: District of Columbia
+        year:
+          type: string
+          description: Fiscal year for the income limit data
+          example: '2024'
+        median_income:
+          type: integer
+          description: Area Median Income (AMI) in USD
+          example: 143300
+        VeryLow:
+          description: Income limits at 50% of AMI (Very Low Income)
+          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+        ExtVeryLow:
+          description: Income limits at 30% of AMI (Extremely Low Income)
+          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+        Low:
+          description: Income limits at 80% of AMI (Low Income)
+          $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
     IncomeLimitResponse:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/IncomeLimitArea'
-    IncomeLimitStateResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            metroareas:
-              type: array
-              items:
-                $ref: '#/components/schemas/IncomeLimitArea'
-            counties:
-              type: array
-              items:
-                $ref: '#/components/schemas/IncomeLimitArea'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Unauthorized access. Please provide a valid bearer token.
   securitySchemes:
     bearerAuth:
       type: http

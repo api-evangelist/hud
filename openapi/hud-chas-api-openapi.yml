@@ -84,13 +84,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CHASResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CHASRecord'
     ErrorResponse:
       type: object
       properties:
@@ -147,6 +140,13 @@ components:
         T4_moe:
           type: number
           description: LI households with housing problems margin of error
+    CHASResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CHASRecord'
   securitySchemes:
     bearerAuth:
       type: http
