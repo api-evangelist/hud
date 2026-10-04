@@ -103,27 +103,11 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-          example: Unauthorized access. Please provide a valid bearer token.
-    IncomeLimitStateResponse:
+    IncomeLimitResponse:
       type: object
       properties:
         data:
-          type: object
-          properties:
-            metroareas:
-              type: array
-              items:
-                $ref: '#/components/schemas/IncomeLimitArea'
-            counties:
-              type: array
-              items:
-                $ref: '#/components/schemas/IncomeLimitArea'
+          $ref: '#/components/schemas/IncomeLimitArea'
     IncomeLimitByHouseholdSize:
       type: object
       description: Income limit values by household size (1-8 persons)
@@ -160,6 +144,27 @@ components:
           type: integer
           description: Income limit for 8-person household in USD
           example: 67800
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthorized access. Please provide a valid bearer token.
+    IncomeLimitStateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            metroareas:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
+            counties:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncomeLimitArea'
     IncomeLimitArea:
       type: object
       description: Income limit data for a geographic area
@@ -196,11 +201,6 @@ components:
         Low:
           description: Income limits at 80% of AMI (Low Income)
           $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
-    IncomeLimitResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/IncomeLimitArea'
   securitySchemes:
     bearerAuth:
       type: http
