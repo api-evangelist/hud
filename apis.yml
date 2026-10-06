@@ -36,7 +36,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hud.png
 url: https://raw.githubusercontent.com/api-evangelist/hud/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 tags:
   - Housing
@@ -180,6 +180,8 @@ apis:
   - type: OpenAPI
     url: openapi/hud-zip-code-crosswalk-api-openapi.yml
 common:
+  - url: https://www.hud.gov/rss.xml
+    type: BlogRSS
   - type: Open Data
     url: https://data.hud.gov/
   - type: HUD USER
