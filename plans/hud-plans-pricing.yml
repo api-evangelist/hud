@@ -45,3 +45,21 @@ plans:
       - Returns HUD-approved counseling agency details
 termsOfService: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
 contact: OpenData@hud.gov
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free - HUD User Datasets API
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Free - Housing Counselor Search API
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
