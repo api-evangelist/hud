@@ -103,47 +103,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    IncomeLimitResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/IncomeLimitArea'
-    IncomeLimitByHouseholdSize:
-      type: object
-      description: Income limit values by household size (1-8 persons)
-      properties:
-        l1:
-          type: integer
-          description: Income limit for 1-person household in USD
-          example: 35950
-        l2:
-          type: integer
-          description: Income limit for 2-person household in USD
-          example: 41100
-        l3:
-          type: integer
-          description: Income limit for 3-person household in USD
-          example: 46200
-        l4:
-          type: integer
-          description: Income limit for 4-person household in USD
-          example: 51350
-        l5:
-          type: integer
-          description: Income limit for 5-person household in USD
-          example: 55450
-        l6:
-          type: integer
-          description: Income limit for 6-person household in USD
-          example: 59600
-        l7:
-          type: integer
-          description: Income limit for 7-person household in USD
-          example: 63700
-        l8:
-          type: integer
-          description: Income limit for 8-person household in USD
-          example: 67800
     ErrorResponse:
       type: object
       properties:
@@ -201,6 +160,47 @@ components:
         Low:
           description: Income limits at 80% of AMI (Low Income)
           $ref: '#/components/schemas/IncomeLimitByHouseholdSize'
+    IncomeLimitResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/IncomeLimitArea'
+    IncomeLimitByHouseholdSize:
+      type: object
+      description: Income limit values by household size (1-8 persons)
+      properties:
+        l1:
+          type: integer
+          description: Income limit for 1-person household in USD
+          example: 35950
+        l2:
+          type: integer
+          description: Income limit for 2-person household in USD
+          example: 41100
+        l3:
+          type: integer
+          description: Income limit for 3-person household in USD
+          example: 46200
+        l4:
+          type: integer
+          description: Income limit for 4-person household in USD
+          example: 51350
+        l5:
+          type: integer
+          description: Income limit for 5-person household in USD
+          example: 55450
+        l6:
+          type: integer
+          description: Income limit for 6-person household in USD
+          example: 59600
+        l7:
+          type: integer
+          description: Income limit for 7-person household in USD
+          example: 63700
+        l8:
+          type: integer
+          description: Income limit for 8-person household in USD
+          example: 67800
   securitySchemes:
     bearerAuth:
       type: http

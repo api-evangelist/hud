@@ -84,13 +84,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CHASResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CHASRecord'
     CHASRecord:
       type: object
       description: CHAS housing needs data record
@@ -147,6 +140,13 @@ components:
           type: string
           description: Error message
           example: Unauthorized access. Please provide a valid bearer token.
+    CHASResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CHASRecord'
   securitySchemes:
     bearerAuth:
       type: http
