@@ -64,30 +64,182 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-APIs.json profile for the U.S. Department of Housing and Urban Development (HUD) public REST APIs.
+The U.S. Department of Housing and Urban Development (HUD) provides public REST APIs for fair housing data, Fair Market Rents, Income Limits, USPS ZIP code crosswalk files, Comprehensive Housing Affordability Strategy (CHAS) data, and housing counseling agency search. All HUD User dataset APIs require a free bearer token obtained from the HUD User portal; the Housing Counselor search API is publicly accessible without authentication.
 
-## APIs Covered
+**Areas:** Housing · Government · Fair Market Rent · Mortgage · Community Development · Public Housing · Section 8 · Income Limits
 
-- **Fair Market Rents API** — FMR data by state, county, and metro area (Section 8 payment standard basis)
-- **Income Limits API** — AMI thresholds at 30/50/80% for housing program eligibility
-- **USPS ZIP Code Crosswalk API** — ZIP-to-census geography mapping (tracts, counties, CBSAs, congressional districts)
-- **CHAS API** — Comprehensive Housing Affordability Strategy data from ACS custom tabulations
-- **Housing Counselor Search API** — Find HUD-approved housing counseling agencies by location
+## HUD - US Department of Housing and Urban Development on APIs.io
 
-## Authentication
+Everything profiled for HUD - US Department of Housing and Urban Development is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hud/](https://apis.io/providers/hud/)** — or go straight to one of the APIs or properties below.
 
-HUD User dataset APIs require a free bearer token. Register at https://www.huduser.gov/hudapi/public/register
+### APIs (10)
 
-The Housing Counselor Search API is publicly accessible with no authentication required.
+- [HUD User Fair Market Rents API](https://apis.io/apis/hud/hud-user-fair-market-rents-api/) — Provides Fair Market Rent (FMR) data by state, county, and metropolitan area. Returns efficiency through four-bedroom rental rates used as the basis for…
+- [HUD User Income Limits API](https://apis.io/apis/hud/hud-user-income-limits-api/) — Returns HUD Income Limits at 30%, 50%, and 80% of Area Median Income (AMI) thresholds by geographic area. Used to determine eligibility for HUD housing…
+- [HUD User USPS ZIP Code Crosswalk API](https://apis.io/apis/hud/hud-user-usps-zip-code-crosswalk-api/) — Maps USPS ZIP codes to and from census tracts, counties, CBSAs, congressional districts, and county subdivisions. Supports geographic lookups and crosswalk…
+- [HUD User CHAS API](https://apis.io/apis/hud/hud-user-chas-api/) — Comprehensive Housing Affordability Strategy (CHAS) data provides custom tabulations of American Community Survey data on housing needs at national, state,…
+- [HUD Housing Counselor Search API](https://apis.io/apis/hud/hud-housing-counselor-search-api/) — Search for HUD-approved housing counseling agencies by name, city, state, or geographic coordinates. Returns agency contact information and services…
+- [HUD - US Department of Housing and Urban Development CHAS API](https://apis.io/apis/hud/hud-chas-api/) — Comprehensive Housing Affordability Strategy data
+- [HUD - US Department of Housing and Urban Development Fair Market Rents API](https://apis.io/apis/hud/hud-fair-market-rents-api/) — Fair Market Rent data by geography
+- [HUD - US Department of Housing and Urban Development Housing Counseling API](https://apis.io/apis/hud/hud-housing-counseling-api/) — HUD-approved housing counseling agency search
+- [HUD - US Department of Housing and Urban Development Income Limits API](https://apis.io/apis/hud/hud-income-limits-api/) — Area Median Income limits by geography
+- [HUD - US Department of Housing and Urban Development ZIP Code Crosswalk API](https://apis.io/apis/hud/hud-zip-code-crosswalk-api/) — ZIP code to geographic area crosswalk queries
 
-## Rate Limits
+### Published properties
 
-- HUD User APIs: 1,200 requests per minute per token
-- Housing Counselor API: unspecified limit; HTTP 429 returned when exceeded
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Resources
+#### MCP servers (1)
 
-- Developer Portal: https://www.huduser.gov/portal/dataset/api.html
-- Data Catalog: https://data.hud.gov/datasets
-- Terms of Service: https://www.huduser.gov/portal/dataset/api-terms-of-service.html
-- Contact: OpenData@hud.gov
+Model Context Protocol servers that expose the API to agents.
+
+- [hud-mcp.yml](https://apis.io/servers/hud/hud-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Hud Agentic Access](https://apis.io/agentic-access/hud/hud-agentic-access/)
+
+#### JSON Schema (3)
+
+The data models the API reads and writes.
+
+- [HUD Fair Market Rent](https://apis.io/schemas/hud/hud-fair-market-rent/)
+- [HUD Housing Counseling Agency](https://apis.io/schemas/hud/hud-housing-counseling-agency/)
+- [HUD Income Limits](https://apis.io/schemas/hud/hud-income-limits/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Hud Context](https://apis.io/jsonld/hud/hud-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [HUD API Vocabulary](https://apis.io/vocabularies/hud/hud-vocabulary/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [Hud Fair Market Rent Example](https://apis.io/examples/hud/hud-fair-market-rent-example/)
+- [Hud Income Limits Example](https://apis.io/examples/hud/hud-income-limits-example/)
+- [Hud Usps Zip Crosswalk Example](https://apis.io/examples/hud/hud-usps-zip-crosswalk-example/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [HUD User CHAS API](https://apis.io/collections/hud/open-hud-chas-api/)
+- [HUD User CHAS Fair Market Rents API](https://apis.io/collections/hud/open-hud-fair-market-rents-api/)
+- [HUD User CHAS Housing Counseling API](https://apis.io/collections/hud/open-hud-housing-counseling-api/)
+- [HUD User CHAS Income Limits API](https://apis.io/collections/hud/open-hud-income-limits-api/)
+- [HUD User CHAS ZIP Code Crosswalk API](https://apis.io/collections/hud/open-hud-zip-code-crosswalk-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [HUD - US Department of Housing and Urban Development — jsonschema rules](https://apis.io/rules/hud/hud-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Hud Authentication](https://apis.io/security/hud/hud-authentication/)
+- [Hud Domain Security](https://apis.io/security/hud/hud-domain-security/)
+- [Hud Vulnerability Disclosure](https://apis.io/security/hud/hud-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Hud Plans Pricing](https://apis.io/plans/hud/hud-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Hud Rate Limits](https://apis.io/rate-limits/hud/hud-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Hud Finops](https://apis.io/finops/hud/hud-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.hud.gov/)
+- [Documentation](https://www.huduser.gov/portal/dataset/api.html)
+- [Getting started](https://www.huduser.gov/portal/dataset/fmr-api.html)
+- [API reference](https://www.huduser.gov/portal/dataset/uspszip-api.html)
+- [Pricing](https://www.huduser.gov/portal/dataset/api-terms-of-service.html)
+- [Sign up](https://www.huduser.gov/hudapi/public/register)
+- [Support](https://www.hud.gov/contactus)
+- [Blog](https://www.hud.gov/press/blog)
+- [Security](https://www.hud.gov/vulnerability-disclosure-policy)
+- [Terms of service](https://www.huduser.gov/portal/dataset/api-terms-of-service.html)
+- [Privacy policy](https://www.hud.gov/aboutus/privacy-policy)
+- [GitHub](https://github.com/hudgov)
+- [Status](https://data.hud.gov/)
+
+## API Evangelist rating
+
+**Kin Score 37.8** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.4 |
+| Contract quality | 55.8 |
+| Contract governance | 28.0 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 14.3 |
+| Access clarity | 15.8 |
+
+**Agent readiness 30.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 26.5** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hud/](https://apis.io/providers/hud/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for HUD - US Department of Housing and Urban Development: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hud/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
